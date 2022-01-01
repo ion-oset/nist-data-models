@@ -1,0 +1,5 @@
+# --- Common
+
+syntax: rootglob
+
+.local/
