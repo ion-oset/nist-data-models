@@ -1,0 +1,10 @@
+[run]
+data_file = .local/coverage/data
+
+[html]
+directory = .local/coverage/html
+
+[report]
+omit =
+    */.local/*
+    */.venv/*
