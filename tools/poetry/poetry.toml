@@ -1,0 +1,8 @@
+# Project specific Poetry configuration
+# See: https://python-poetry.org/docs/configuration/
+
+# cache-dir = 
+# installer.parallel = true
+# virtualenvs.create = true
+# virtualenvs.in-project = true
+# virtualenvs.path = "{cache-dir}/virtualenvs"

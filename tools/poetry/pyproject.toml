@@ -1,0 +1,21 @@
+[build-system]
+
+requires = [ "poetry>=1.0.0" ]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry]
+
+name = "{project-name}"
+version = "0.0.x"
+description = "{Project summary}"
+authors = [
+    "{name} <{email}@{domain}>"
+]
+packages = [
+    { include = "{path/to/source}", from = "src" }
+]
+
+[tools.poetry.dependencies]
+
+[tools.poetry.dev-dependencies]
+
