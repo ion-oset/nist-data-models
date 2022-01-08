@@ -14,3 +14,4 @@
 
 include tools/make/root.make
 include tools/make/build.make
+include tools/make/tests.make

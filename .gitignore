@@ -15,3 +15,7 @@ dist/
 *.egg
 *.egg-info
 .venv
+
+# Tests
+
+.pytest_cache/
