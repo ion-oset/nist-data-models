@@ -29,3 +29,7 @@ dist/
 .coverage/
 .coverage.*
 *,cover
+
+# Type Checking
+
+.mypy_cache/
