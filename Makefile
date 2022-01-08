@@ -13,3 +13,4 @@
 # --- Modules
 
 include tools/make/root.make
+include tools/make/build.make

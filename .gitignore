@@ -1,3 +1,17 @@
 # --- Common
 
 /.local/
+
+# --- Python
+
+*.py[cdo]
+__pycache__
+*.so
+
+# Builds
+
+build/
+dist/
+*.egg
+*.egg-info
+.venv

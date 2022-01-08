@@ -9,12 +9,12 @@ PROJECT_NAME := "{Project}"
 PROJECT_ROOT := $(abspath $(dir $(firstword $(MAKEFILE_LIST))))
 
 # Command runner, if any
-RUN := 
+RUN := poetry
 
 # --- Rules
 
 # Show help by default
-help: help_prefix help_suffix
+help: help_prefix help_build help_suffix
 
 
 # Block appearing before all other help output
