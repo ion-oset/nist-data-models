@@ -19,3 +19,9 @@ dist/
 # Tests
 
 .pytest_cache/
+
+# Code Coverage
+
+.coverage/
+.coverage.*
+*,cover

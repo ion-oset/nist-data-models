@@ -14,7 +14,7 @@ RUN := poetry
 # --- Rules
 
 # Show help by default
-help: help_prefix help_build help_tests help_suffix
+help: help_prefix help_build help_tests help_coverage help_suffix
 
 
 # Block appearing before all other help output
