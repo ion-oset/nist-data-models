@@ -1,0 +1,14 @@
+[build-system]
+
+requires = [ "poetry>=1.0.0" ]
+build-backend = "poetry.masonry.api"
+
+[tool.poetry]
+
+name = "electos.nist-datamodels"
+version = "0.0.0"
+description = "Dataclasses for NIST SP-1500 schemas"
+authors = [ "Ion Y <ion@osetinstitute.org>" ]
+packages = [
+    { include = "electos/datamodels/nist", from = "src" }
+]
