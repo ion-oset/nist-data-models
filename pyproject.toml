@@ -12,3 +12,11 @@ authors = [ "Ion Y <ion@osetinstitute.org>" ]
 packages = [
     { include = "electos/datamodels/nist", from = "src" }
 ]
+
+[tool.poetry.dependencies]
+
+# Mininum version to natively support dataclasses
+python = "^3.7"
+
+# Core libraries
+pydantic = "1.8.2"
