@@ -20,3 +20,11 @@ python = "^3.7"
 
 # Core libraries
 pydantic = "1.8.2"
+
+[tool.poetry.dev-dependencies]
+
+# Testing
+pytest = "~6.2.5"
+pytest-mock = "~3.6.0"
+# Support 'importlib.resources.files'
+importlib-resources = { version = "~5.2.2", python = "<= 3.9" }
