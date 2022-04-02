@@ -16,7 +16,7 @@ class AllocationStatus(Enum):
     yes = 'yes'
 
 
-class _Type(Enum):
+class _TypeModel01(Enum):
     CVR_Annotation = 'CVR.Annotation'
 
 
@@ -24,34 +24,10 @@ class Annotation(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _Type = Field(..., alias='@type')
+    _type: _TypeModel01 = Field(..., alias='@type')
     AdjudicatorName: Optional[List[str]] = Field(None, min_items=0)
     Message: Optional[List[str]] = Field(None, min_items=0)
     TimeStamp: Optional[datetime] = None
-
-
-class _TypeModel(Enum):
-    CVR_BallotMeasureContest = 'CVR.BallotMeasureContest'
-
-
-class _TypeModel1(Enum):
-    CVR_BallotMeasureSelection = 'CVR.BallotMeasureSelection'
-
-
-class _TypeModel2(Enum):
-    CVR_CVR = 'CVR.CVR'
-
-
-class _TypeModel3(Enum):
-    CVR_CVRContest = 'CVR.CVRContest'
-
-
-class _TypeModel4(Enum):
-    CVR_CVRContestSelection = 'CVR.CVRContestSelection'
-
-
-class _TypeModel5(Enum):
-    CVR_CVRSnapshot = 'CVR.CVRSnapshot'
 
 
 class CVRStatus(Enum):
@@ -65,40 +41,8 @@ class CVRType(Enum):
     original = 'original'
 
 
-class _TypeModel6(Enum):
-    CVR_CVRWriteIn = 'CVR.CVRWriteIn'
-
-
-class _TypeModel7(Enum):
-    CVR_Candidate = 'CVR.Candidate'
-
-
-class _TypeModel8(Enum):
-    CVR_CandidateContest = 'CVR.CandidateContest'
-
-
-class _TypeModel9(Enum):
-    CVR_CandidateSelection = 'CVR.CandidateSelection'
-
-
-class _TypeModel10(Enum):
-    CVR_CastVoteRecordReport = 'CVR.CastVoteRecordReport'
-
-
 class CastVoteRecordVersion(Enum):
     field_1_0_0 = '1.0.0'
-
-
-class _TypeModel11(Enum):
-    CVR_Code = 'CVR.Code'
-
-
-class _TypeModel12(Enum):
-    CVR_Contest = 'CVR.Contest'
-
-
-class _TypeModel13(Enum):
-    CVR_ContestSelection = 'CVR.ContestSelection'
 
 
 class ContestSelectionStatus(Enum):
@@ -116,11 +60,7 @@ class ContestStatus(Enum):
     undervoted = 'undervoted'
 
 
-class _TypeModel14(Enum):
-    CVR_Election = 'CVR.Election'
-
-
-class _TypeModel15(Enum):
+class _TypeModel17(Enum):
     CVR_File = 'CVR.File'
 
 
@@ -128,7 +68,7 @@ class File(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel15 = Field(..., alias='@type')
+    _type: _TypeModel17 = Field(..., alias='@type')
     Data: str
     FileName: Optional[str] = None
     MimeType: Optional[str] = None
@@ -136,14 +76,6 @@ class File(BaseModel):
 
 class FractionalNumber(BaseModel):
     __root__: constr(regex=r'([0-9]+/[1-9]+[0-9]*)|(\.[0-9]+)')
-
-
-class _TypeModel16(Enum):
-    CVR_GpUnit = 'CVR.GpUnit'
-
-
-class _TypeModel17(Enum):
-    CVR_Hash = 'CVR.Hash'
 
 
 class HashType(Enum):
@@ -162,7 +94,7 @@ class IdentifierType(Enum):
     state_level = 'state-level'
 
 
-class _TypeModel18(Enum):
+class _TypeModel20(Enum):
     CVR_Image = 'CVR.Image'
 
 
@@ -170,32 +102,16 @@ class Image(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel18 = Field(..., alias='@type')
+    _type: _TypeModel20 = Field(..., alias='@type')
     Data: str
     FileName: Optional[str] = None
     MimeType: Optional[str] = None
-
-
-class _TypeModel19(Enum):
-    CVR_ImageData = 'CVR.ImageData'
 
 
 class IndicationStatus(Enum):
     no = 'no'
     unknown = 'unknown'
     yes = 'yes'
-
-
-class _TypeModel20(Enum):
-    CVR_Party = 'CVR.Party'
-
-
-class _TypeModel21(Enum):
-    CVR_PartyContest = 'CVR.PartyContest'
-
-
-class _TypeModel22(Enum):
-    CVR_PartySelection = 'CVR.PartySelection'
 
 
 class PositionStatus(Enum):
@@ -213,10 +129,6 @@ class ReportType(Enum):
     rcv_round = 'rcv-round'
 
 
-class _TypeModel23(Enum):
-    CVR_ReportingDevice = 'CVR.ReportingDevice'
-
-
 class ReportingUnitType(Enum):
     combined_precinct = 'combined-precinct'
     other = 'other'
@@ -224,14 +136,6 @@ class ReportingUnitType(Enum):
     precinct = 'precinct'
     split_precinct = 'split-precinct'
     vote_center = 'vote-center'
-
-
-class _TypeModel24(Enum):
-    CVR_RetentionContest = 'CVR.RetentionContest'
-
-
-class _TypeModel25(Enum):
-    CVR_SelectionPosition = 'CVR.SelectionPosition'
 
 
 class VoteVariation(Enum):
@@ -248,15 +152,23 @@ class VoteVariation(Enum):
     super_majority = 'super-majority'
 
 
+class _TypeModel13(Enum):
+    CVR_Code = 'CVR.Code'
+
+
 class Code(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel11 = Field(..., alias='@type')
+    _type: _TypeModel13 = Field(..., alias='@type')
     Label: Optional[str] = None
     OtherType: Optional[str] = None
     Type: IdentifierType
     Value: str
+
+
+class _TypeModel15(Enum):
+    CVR_ContestSelection = 'CVR.ContestSelection'
 
 
 class ContestSelection(BaseModel):
@@ -264,8 +176,12 @@ class ContestSelection(BaseModel):
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel13 = Field(..., alias='@type')
+    _type: _TypeModel15 = Field(..., alias='@type')
     Code: Optional[List[Code]] = Field(None, min_items=0)
+
+
+class _TypeModel18(Enum):
+    CVR_GpUnit = 'CVR.GpUnit'
 
 
 class GpUnit(BaseModel):
@@ -273,7 +189,7 @@ class GpUnit(BaseModel):
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel16 = Field(..., alias='@type')
+    _type: _TypeModel18 = Field(..., alias='@type')
     Code: Optional[List[Code]] = Field(None, min_items=0)
     Name: Optional[str] = None
     OtherType: Optional[str] = None
@@ -281,24 +197,36 @@ class GpUnit(BaseModel):
     Type: ReportingUnitType
 
 
+class _TypeModel19(Enum):
+    CVR_Hash = 'CVR.Hash'
+
+
 class Hash(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel17 = Field(..., alias='@type')
+    _type: _TypeModel19 = Field(..., alias='@type')
     OtherType: Optional[str] = None
     Type: HashType
     Value: str
+
+
+class _TypeModel21(Enum):
+    CVR_ImageData = 'CVR.ImageData'
 
 
 class ImageData(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel19 = Field(..., alias='@type')
+    _type: _TypeModel21 = Field(..., alias='@type')
     Hash: Optional[Hash] = None
     Image: Optional[Image] = None
     Location: Optional[AnyUrl] = None
+
+
+class _TypeModel22(Enum):
+    CVR_Party = 'CVR.Party'
 
 
 class Party(BaseModel):
@@ -306,10 +234,14 @@ class Party(BaseModel):
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel20 = Field(..., alias='@type')
+    _type: _TypeModel22 = Field(..., alias='@type')
     Abbreviation: Optional[str] = None
     Code: Optional[List[Code]] = Field(None, min_items=0)
     Name: Optional[str] = None
+
+
+class _TypeModel24(Enum):
+    CVR_PartySelection = 'CVR.PartySelection'
 
 
 class PartySelection(BaseModel):
@@ -317,9 +249,13 @@ class PartySelection(BaseModel):
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel22 = Field(..., alias='@type')
+    _type: _TypeModel24 = Field(..., alias='@type')
     Code: Optional[List[Code]] = Field(None, min_items=0)
     PartyIds: List[str] = Field(..., min_items=1)
+
+
+class _TypeModel23(Enum):
+    CVR_ReportingDevice = 'CVR.ReportingDevice'
 
 
 class ReportingDevice(BaseModel):
@@ -337,23 +273,35 @@ class ReportingDevice(BaseModel):
     SerialNumber: Optional[str] = None
 
 
+class _TypeModel02(Enum):
+    CVR_BallotMeasureSelection = 'CVR.BallotMeasureSelection'
+
+
 class BallotMeasureSelection(BaseModel):
     class Config:
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel1 = Field(..., alias='@type')
+    _type: _TypeModel02 = Field(..., alias='@type')
     Code: Optional[List[Code]] = Field(None, min_items=0)
     Selection: str
+
+
+class _TypeModel08(Enum):
+    CVR_CVRWriteIn = 'CVR.CVRWriteIn'
 
 
 class CVRWriteIn(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel6 = Field(..., alias='@type')
+    _type: _TypeModel08 = Field(..., alias='@type')
     Text: Optional[str] = None
     WriteInImage: Optional[ImageData] = None
+
+
+class _TypeModel09(Enum):
+    CVR_Candidate = 'CVR.Candidate'
 
 
 class Candidate(BaseModel):
@@ -361,10 +309,14 @@ class Candidate(BaseModel):
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel7 = Field(..., alias='@type')
+    _type: _TypeModel09 = Field(..., alias='@type')
     Code: Optional[List[Code]] = Field(None, min_items=0)
     Name: Optional[str] = None
     PartyId: Optional[str] = None
+
+
+class _TypeModel11(Enum):
+    CVR_CandidateSelection = 'CVR.CandidateSelection'
 
 
 class CandidateSelection(BaseModel):
@@ -372,10 +324,14 @@ class CandidateSelection(BaseModel):
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel9 = Field(..., alias='@type')
+    _type: _TypeModel11 = Field(..., alias='@type')
     CandidateIds: Optional[List[str]] = Field(None, min_items=0)
     Code: Optional[List[Code]] = Field(None, min_items=0)
     IsWriteIn: Optional[bool] = None
+
+
+class _TypeModel14(Enum):
+    CVR_Contest = 'CVR.Contest'
 
 
 class Contest(BaseModel):
@@ -383,7 +339,7 @@ class Contest(BaseModel):
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel12 = Field(..., alias='@type')
+    _type: _TypeModel14 = Field(..., alias='@type')
     Abbreviation: Optional[str] = None
     Code: Optional[List[Code]] = Field(None, min_items=0)
     ContestSelection: List[
@@ -394,6 +350,10 @@ class Contest(BaseModel):
     Name: Optional[str] = None
     OtherVoteVariation: Optional[str] = None
     VoteVariation: Optional[VoteVariation] = None
+
+
+class _TypeModel25(Enum):
+    CVR_PartyContest = 'CVR.PartyContest'
 
 
 class PartyContest(BaseModel):
@@ -401,7 +361,7 @@ class PartyContest(BaseModel):
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel21 = Field(..., alias='@type')
+    _type: _TypeModel25 = Field(..., alias='@type')
     Abbreviation: Optional[str] = None
     Code: Optional[List[Code]] = Field(None, min_items=0)
     ContestSelection: List[
@@ -414,12 +374,16 @@ class PartyContest(BaseModel):
     VoteVariation: Optional[VoteVariation] = None
 
 
+class _TypeModel26(Enum):
+    CVR_RetentionContest = 'CVR.RetentionContest'
+
+
 class RetentionContest(BaseModel):
     class Config:
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel24 = Field(..., alias='@type')
+    _type: _TypeModel26 = Field(..., alias='@type')
     Abbreviation: Optional[str] = None
     CandidateId: Optional[str] = None
     Code: Optional[List[Code]] = Field(None, min_items=0)
@@ -433,11 +397,15 @@ class RetentionContest(BaseModel):
     VoteVariation: Optional[VoteVariation] = None
 
 
+class _TypeModel27(Enum):
+    CVR_SelectionPosition = 'CVR.SelectionPosition'
+
+
 class SelectionPosition(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel25 = Field(..., alias='@type')
+    _type: _TypeModel27 = Field(..., alias='@type')
     CVRWriteIn: Optional[CVRWriteIn] = None
     Code: Optional[List[Code]] = Field(None, min_items=0)
     FractionalVotes: Optional[FractionalNumber] = None
@@ -452,12 +420,16 @@ class SelectionPosition(BaseModel):
     Status: Optional[List[PositionStatus]] = Field(None, min_items=0)
 
 
+class _TypeModel03(Enum):
+    CVR_BallotMeasureSelection = 'CVR.BallotMeasureSelection'
+
+
 class BallotMeasureContest(BaseModel):
     class Config:
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel = Field(..., alias='@type')
+    _type: _TypeModel03 = Field(..., alias='@type')
     Abbreviation: Optional[str] = None
     Code: Optional[List[Code]] = Field(None, min_items=0)
     ContestSelection: List[
@@ -470,11 +442,15 @@ class BallotMeasureContest(BaseModel):
     VoteVariation: Optional[VoteVariation] = None
 
 
+class _TypeModel06(Enum):
+    CVR_CVRContestSelection = 'CVR.CVRContestSelection'
+
+
 class CVRContestSelection(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel4 = Field(..., alias='@type')
+    _type: _TypeModel06 = Field(..., alias='@type')
     ContestSelectionId: Optional[str] = None
     OptionPosition: Optional[int] = None
     OtherStatus: Optional[str] = None
@@ -485,12 +461,16 @@ class CVRContestSelection(BaseModel):
     TotalNumberVotes: Optional[int] = None
 
 
+class _TypeModel10(Enum):
+    CVR_CandidateContest = 'CVR.CandidateContest'
+
+
 class CandidateContest(BaseModel):
     class Config:
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel8 = Field(..., alias='@type')
+    _type: _TypeModel10 = Field(..., alias='@type')
     Abbreviation: Optional[str] = None
     Code: Optional[List[Code]] = Field(None, min_items=0)
     ContestSelection: List[
@@ -506,12 +486,16 @@ class CandidateContest(BaseModel):
     VotesAllowed: Optional[int] = None
 
 
+class _TypeModel16(Enum):
+    CVR_Election = 'CVR.Election'
+
+
 class Election(BaseModel):
     class Config:
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel14 = Field(..., alias='@type')
+    _type: _TypeModel16 = Field(..., alias='@type')
     Candidate: Optional[List[Candidate]] = Field(None, min_items=0)
     Code: Optional[List[Code]] = Field(None, min_items=0)
     Contest: List[
@@ -527,11 +511,15 @@ class Election(BaseModel):
     Name: Optional[str] = None
 
 
+class _TypeModel05(Enum):
+    CVR_CVRContest = 'CVR.CVRContest'
+
+
 class CVRContest(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel3 = Field(..., alias='@type')
+    _type: _TypeModel05 = Field(..., alias='@type')
     CVRContestSelection: Optional[List[CVRContestSelection]] = Field(None, min_items=0)
     ContestId: str
     OtherStatus: Optional[str] = None
@@ -542,12 +530,16 @@ class CVRContest(BaseModel):
     WriteIns: Optional[int] = None
 
 
+class _TypeModel07(Enum):
+    CVR_CVRSnapshot = 'CVR.CVRSnapshot'
+
+
 class CVRSnapshot(BaseModel):
     class Config:
         extra = Extra.forbid
 
     _id: str = Field(..., alias='@id')
-    _type: _TypeModel5 = Field(..., alias='@type')
+    _type: _TypeModel07 = Field(..., alias='@type')
     Annotation: Optional[List[Annotation]] = Field(None, min_items=0)
     CVRContest: Optional[List[CVRContest]] = Field(None, min_items=0)
     OtherStatus: Optional[str] = None
@@ -555,11 +547,15 @@ class CVRSnapshot(BaseModel):
     Type: CVRType
 
 
+class _TypeModel04(Enum):
+    CVR_CVR = 'CVR.CVR'
+
+
 class CVR(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel2 = Field(..., alias='@type')
+    _type: _TypeModel04 = Field(..., alias='@type')
     BallotAuditId: Optional[str] = None
     BallotImage: Optional[List[ImageData]] = Field(None, min_items=0)
     BallotPrePrintedId: Optional[str] = None
@@ -576,11 +572,15 @@ class CVR(BaseModel):
     UniqueId: Optional[str] = None
 
 
+class _TypeModel12(Enum):
+    CVR_CastVoteRecordReport = 'CVR.CastVoteRecordReport'
+
+
 class CastVoteRecordReport(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _type: _TypeModel10 = Field(..., alias='@type')
+    _type: _TypeModel12 = Field(..., alias='@type')
     CVR: Optional[List[CVR]] = Field(None, min_items=0)
     Election: List[Election] = Field(..., min_items=1)
     GeneratedDate: datetime
