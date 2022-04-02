@@ -11,31 +11,12 @@ from pydantic import AnyUrl, BaseModel, Extra, Field
 from typing_extensions import Literal
 
 
+# --- Enumerations
+
 class AllocationStatus(Enum):
     no = 'no'
     unknown = 'unknown'
     yes = 'yes'
-
-
-class Annotation(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _type: Literal['CVR.Annotation'] = Field(..., alias='@type')
-    AdjudicatorName: Optional[List[str]] = Field(None, min_items=0)
-    Message: Optional[List[str]] = Field(None, min_items=0)
-    TimeStamp: Optional[datetime] = None
-
-
-class CVRStatus(Enum):
-    needs_adjudication = 'needs-adjudication'
-    other = 'other'
-
-
-class CVRType(Enum):
-    interpreted = 'interpreted'
-    modified = 'modified'
-    original = 'original'
 
 
 class CastVoteRecordVersion(Enum):
@@ -57,18 +38,15 @@ class ContestStatus(Enum):
     undervoted = 'undervoted'
 
 
-class File(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _type: Literal['CVR.File'] = Field(..., alias='@type')
-    Data: str
-    FileName: Optional[str] = None
-    MimeType: Optional[str] = None
+class CVRStatus(Enum):
+    needs_adjudication = 'needs-adjudication'
+    other = 'other'
 
 
-class FractionalNumber(BaseModel):
-    __root__: str = Field(..., regex='([0-9]+/[1-9]+[0-9]*)|(\\.[0-9]+)')
+class CVRType(Enum):
+    interpreted = 'interpreted'
+    modified = 'modified'
+    original = 'original'
 
 
 class HashType(Enum):
@@ -85,16 +63,6 @@ class IdentifierType(Enum):
     ocd_id = 'ocd-id'
     other = 'other'
     state_level = 'state-level'
-
-
-class Image(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _type: Literal['CVR.Image'] = Field(..., alias='@type')
-    Data: str
-    FileName: Optional[str] = None
-    MimeType: Optional[str] = None
 
 
 class IndicationStatus(Enum):
@@ -141,6 +109,18 @@ class VoteVariation(Enum):
     super_majority = 'super-majority'
 
 
+# --- Models
+
+class Annotation(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _type: Literal['CVR.Annotation'] = Field(..., alias='@type')
+    AdjudicatorName: Optional[List[str]] = Field(None, min_items=0)
+    Message: Optional[List[str]] = Field(None, min_items=0)
+    TimeStamp: Optional[datetime] = None
+
+
 class Code(BaseModel):
     class Config:
         extra = Extra.forbid
@@ -152,26 +132,18 @@ class Code(BaseModel):
     Value: str
 
 
-class ContestSelection(BaseModel):
+class File(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias='@id')
-    _type: Literal['CVR.ContestSelection'] = Field(..., alias='@type')
-    Code: Optional[List[Code]] = Field(None, min_items=0)
+    _type: Literal['CVR.File'] = Field(..., alias='@type')
+    Data: str
+    FileName: Optional[str] = None
+    MimeType: Optional[str] = None
 
 
-class GpUnit(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _id: str = Field(..., alias='@id')
-    _type: Literal['CVR.GpUnit'] = Field(..., alias='@type')
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Name: Optional[str] = None
-    OtherType: Optional[str] = None
-    ReportingDeviceIds: Optional[List[str]] = Field(None, min_items=0)
-    Type: ReportingUnitType
+class FractionalNumber(BaseModel):
+    __root__: str = Field(..., regex='([0-9]+/[1-9]+[0-9]*)|(\\.[0-9]+)')
 
 
 class Hash(BaseModel):
@@ -184,6 +156,16 @@ class Hash(BaseModel):
     Value: str
 
 
+class Image(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _type: Literal['CVR.Image'] = Field(..., alias='@type')
+    Data: str
+    FileName: Optional[str] = None
+    MimeType: Optional[str] = None
+
+
 class ImageData(BaseModel):
     class Config:
         extra = Extra.forbid
@@ -192,27 +174,6 @@ class ImageData(BaseModel):
     Hash: Optional[Hash] = None
     Image: Optional[Image] = None
     Location: Optional[AnyUrl] = None
-
-
-class Party(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _id: str = Field(..., alias='@id')
-    _type: Literal['CVR.Party'] = Field(..., alias='@type')
-    Abbreviation: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Name: Optional[str] = None
-
-
-class PartySelection(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _id: str = Field(..., alias='@id')
-    _type: Literal['CVR.PartySelection'] = Field(..., alias='@type')
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    PartyIds: List[str] = Field(..., min_items=1)
 
 
 class ReportingDevice(BaseModel):
@@ -230,6 +191,19 @@ class ReportingDevice(BaseModel):
     SerialNumber: Optional[str] = None
 
 
+class GpUnit(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _id: str = Field(..., alias='@id')
+    _type: Literal['CVR.GpUnit'] = Field(..., alias='@type')
+    Code: Optional[List[Code]] = Field(None, min_items=0)
+    Name: Optional[str] = None
+    OtherType: Optional[str] = None
+    ReportingDeviceIds: Optional[List[str]] = Field(None, min_items=0)
+    Type: ReportingUnitType
+
+
 class BallotMeasureSelection(BaseModel):
     class Config:
         extra = Extra.forbid
@@ -238,26 +212,6 @@ class BallotMeasureSelection(BaseModel):
     _type: Literal['CVR.BallotMeasureSelection'] = Field(..., alias='@type')
     Code: Optional[List[Code]] = Field(None, min_items=0)
     Selection: str
-
-
-class CVRWriteIn(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _type: Literal['CVR.CVRWriteIn'] = Field(..., alias='@type')
-    Text: Optional[str] = None
-    WriteInImage: Optional[ImageData] = None
-
-
-class Candidate(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _id: str = Field(..., alias='@id')
-    _type: Literal['CVR.Candidate'] = Field(..., alias='@type')
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Name: Optional[str] = None
-    PartyId: Optional[str] = None
 
 
 class CandidateSelection(BaseModel):
@@ -269,6 +223,47 @@ class CandidateSelection(BaseModel):
     CandidateIds: Optional[List[str]] = Field(None, min_items=0)
     Code: Optional[List[Code]] = Field(None, min_items=0)
     IsWriteIn: Optional[bool] = None
+
+
+class ContestSelection(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _id: str = Field(..., alias='@id')
+    _type: Literal['CVR.ContestSelection'] = Field(..., alias='@type')
+    Code: Optional[List[Code]] = Field(None, min_items=0)
+
+
+class PartySelection(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _id: str = Field(..., alias='@id')
+    _type: Literal['CVR.PartySelection'] = Field(..., alias='@type')
+    Code: Optional[List[Code]] = Field(None, min_items=0)
+    PartyIds: List[str] = Field(..., min_items=1)
+
+
+class Party(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _id: str = Field(..., alias='@id')
+    _type: Literal['CVR.Party'] = Field(..., alias='@type')
+    Abbreviation: Optional[str] = None
+    Code: Optional[List[Code]] = Field(None, min_items=0)
+    Name: Optional[str] = None
+
+
+class Candidate(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _id: str = Field(..., alias='@id')
+    _type: Literal['CVR.Candidate'] = Field(..., alias='@type')
+    Code: Optional[List[Code]] = Field(None, min_items=0)
+    Name: Optional[str] = None
+    PartyId: Optional[str] = None
 
 
 class Contest(BaseModel):
@@ -287,6 +282,45 @@ class Contest(BaseModel):
     Name: Optional[str] = None
     OtherVoteVariation: Optional[str] = None
     VoteVariation: Optional[VoteVariation] = None
+
+
+class BallotMeasureContest(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _id: str = Field(..., alias='@id')
+    _type: Literal['CVR.BallotMeasureContest'] = Field(..., alias='@type')
+    Abbreviation: Optional[str] = None
+    Code: Optional[List[Code]] = Field(None, min_items=0)
+    ContestSelection: List[
+        Union[
+            ContestSelection, PartySelection, BallotMeasureSelection, CandidateSelection
+        ]
+    ] = Field(..., min_items=1)
+    Name: Optional[str] = None
+    OtherVoteVariation: Optional[str] = None
+    VoteVariation: Optional[VoteVariation] = None
+
+
+class CandidateContest(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _id: str = Field(..., alias='@id')
+    _type: Literal['CVR.CandidateContest'] = Field(..., alias='@type')
+    Abbreviation: Optional[str] = None
+    Code: Optional[List[Code]] = Field(None, min_items=0)
+    ContestSelection: List[
+        Union[
+            ContestSelection, PartySelection, BallotMeasureSelection, CandidateSelection
+        ]
+    ] = Field(..., min_items=1)
+    Name: Optional[str] = None
+    NumberElected: Optional[int] = None
+    OtherVoteVariation: Optional[str] = None
+    PrimaryPartyId: Optional[str] = None
+    VoteVariation: Optional[VoteVariation] = None
+    VotesAllowed: Optional[int] = None
 
 
 class PartyContest(BaseModel):
@@ -326,6 +360,15 @@ class RetentionContest(BaseModel):
     VoteVariation: Optional[VoteVariation] = None
 
 
+class CVRWriteIn(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _type: Literal['CVR.CVRWriteIn'] = Field(..., alias='@type')
+    Text: Optional[str] = None
+    WriteInImage: Optional[ImageData] = None
+
+
 class SelectionPosition(BaseModel):
     class Config:
         extra = Extra.forbid
@@ -345,24 +388,6 @@ class SelectionPosition(BaseModel):
     Status: Optional[List[PositionStatus]] = Field(None, min_items=0)
 
 
-class BallotMeasureContest(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _id: str = Field(..., alias='@id')
-    _type: Literal['CVR.BallotMeasureContest'] = Field(..., alias='@type')
-    Abbreviation: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    ContestSelection: List[
-        Union[
-            ContestSelection, PartySelection, BallotMeasureSelection, CandidateSelection
-        ]
-    ] = Field(..., min_items=1)
-    Name: Optional[str] = None
-    OtherVoteVariation: Optional[str] = None
-    VoteVariation: Optional[VoteVariation] = None
-
-
 class CVRContestSelection(BaseModel):
     class Config:
         extra = Extra.forbid
@@ -376,48 +401,6 @@ class CVRContestSelection(BaseModel):
     Status: Optional[List[ContestSelectionStatus]] = Field(None, min_items=0)
     TotalFractionalVotes: Optional[FractionalNumber] = None
     TotalNumberVotes: Optional[int] = None
-
-
-class CandidateContest(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _id: str = Field(..., alias='@id')
-    _type: Literal['CVR.CandidateContest'] = Field(..., alias='@type')
-    Abbreviation: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    ContestSelection: List[
-        Union[
-            ContestSelection, PartySelection, BallotMeasureSelection, CandidateSelection
-        ]
-    ] = Field(..., min_items=1)
-    Name: Optional[str] = None
-    NumberElected: Optional[int] = None
-    OtherVoteVariation: Optional[str] = None
-    PrimaryPartyId: Optional[str] = None
-    VoteVariation: Optional[VoteVariation] = None
-    VotesAllowed: Optional[int] = None
-
-
-class Election(BaseModel):
-    class Config:
-        extra = Extra.forbid
-
-    _id: str = Field(..., alias='@id')
-    _type: Literal['CVR.Election'] = Field(..., alias='@type')
-    Candidate: Optional[List[Candidate]] = Field(None, min_items=0)
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Contest: List[
-        Union[
-            Contest,
-            PartyContest,
-            BallotMeasureContest,
-            CandidateContest,
-            RetentionContest,
-        ]
-    ] = Field(..., min_items=1)
-    ElectionScopeId: str
-    Name: Optional[str] = None
 
 
 class CVRContest(BaseModel):
@@ -467,6 +450,27 @@ class CVR(BaseModel):
     ElectionId: str
     PartyIds: Optional[List[str]] = Field(None, min_items=0)
     UniqueId: Optional[str] = None
+
+
+class Election(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    _id: str = Field(..., alias='@id')
+    _type: Literal['CVR.Election'] = Field(..., alias='@type')
+    Candidate: Optional[List[Candidate]] = Field(None, min_items=0)
+    Code: Optional[List[Code]] = Field(None, min_items=0)
+    Contest: List[
+        Union[
+            Contest,
+            PartyContest,
+            BallotMeasureContest,
+            CandidateContest,
+            RetentionContest,
+        ]
+    ] = Field(..., min_items=1)
+    ElectionScopeId: str
+    Name: Optional[str] = None
 
 
 class CastVoteRecordReport(BaseModel):
