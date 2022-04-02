@@ -7,7 +7,7 @@ from datetime import datetime
 from enum import Enum
 from typing import List, Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Extra, Field, constr
+from pydantic import AnyUrl, BaseModel, Extra, Field
 from typing_extensions import Literal
 
 
@@ -68,7 +68,7 @@ class File(BaseModel):
 
 
 class FractionalNumber(BaseModel):
-    __root__: constr(regex=r'([0-9]+/[1-9]+[0-9]*)|(\.[0-9]+)')
+    __root__: str = Field(..., regex='([0-9]+/[1-9]+[0-9]*)|(\\.[0-9]+)')
 
 
 class HashType(Enum):
