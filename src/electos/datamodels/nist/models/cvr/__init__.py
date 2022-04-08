@@ -17,99 +17,99 @@ from electos.datamodels.nist.models.base import NistModel
 
 
 class AllocationStatus(Enum):
-    no = "no"
-    unknown = "unknown"
-    yes = "yes"
+    NO = "no"
+    UNKNOWN = "unknown"
+    YES = "yes"
 
 
 class CastVoteRecordVersion(Enum):
-    field_1_0_0 = "1.0.0"
+    FIELD_1_0_0 = "1.0.0"
 
 
 class ContestSelectionStatus(Enum):
-    generated_rules = "generated-rules"
-    invalidated_rules = "invalidated-rules"
-    needs_adjudication = "needs-adjudication"
-    other = "other"
+    GENERATED_RULES = "generated-rules"
+    INVALIDATED_RULES = "invalidated-rules"
+    NEEDS_ADJUDICATION = "needs-adjudication"
+    OTHER = "other"
 
 
 class ContestStatus(Enum):
-    invalidated_rules = "invalidated-rules"
-    not_indicated = "not-indicated"
-    other = "other"
-    overvoted = "overvoted"
-    undervoted = "undervoted"
+    INVALIDATED_RULES = "invalidated-rules"
+    NOT_INDICATED = "not-indicated"
+    OTHER = "other"
+    OVERVOTED = "overvoted"
+    UNDERVOTED = "undervoted"
 
 
 class CVRStatus(Enum):
-    needs_adjudication = "needs-adjudication"
-    other = "other"
+    NEEDS_ADJUDICATION = "needs-adjudication"
+    OTHER = "other"
 
 
 class CVRType(Enum):
-    interpreted = "interpreted"
-    modified = "modified"
-    original = "original"
+    INTERPRETED = "interpreted"
+    MODIFIED = "modified"
+    ORIGINAL = "original"
 
 
 class HashType(Enum):
-    md6 = "md6"
-    other = "other"
-    sha_256 = "sha-256"
-    sha_512 = "sha-512"
+    MD6 = "md6"
+    OTHER = "other"
+    SHA_256 = "sha-256"
+    SHA_512 = "sha-512"
 
 
 class IdentifierType(Enum):
-    fips = "fips"
-    local_level = "local-level"
-    national_level = "national-level"
-    ocd_id = "ocd-id"
-    other = "other"
-    state_level = "state-level"
+    FIPS = "fips"
+    LOCAL_LEVEL = "local-level"
+    NATIONAL_LEVEL = "national-level"
+    OCD_ID = "ocd-id"
+    OTHER = "other"
+    STATE_LEVEL = "state-level"
 
 
 class IndicationStatus(Enum):
-    no = "no"
-    unknown = "unknown"
-    yes = "yes"
+    NO = "no"
+    UNKNOWN = "unknown"
+    YES = "yes"
 
 
 class PositionStatus(Enum):
-    adjudicated = "adjudicated"
-    generated_rules = "generated-rules"
-    invalidated_rules = "invalidated-rules"
-    other = "other"
+    ADJUDICATED = "adjudicated"
+    GENERATED_RULES = "generated-rules"
+    INVALIDATED_RULES = "invalidated-rules"
+    OTHER = "other"
 
 
 class ReportType(Enum):
-    adjudicated = "adjudicated"
-    aggregated = "aggregated"
-    originating_device_export = "originating-device-export"
-    other = "other"
-    rcv_round = "rcv-round"
+    ADJUDICATED = "adjudicated"
+    AGGREGATED = "aggregated"
+    ORIGINATING_DEVICE_EXPORT = "originating-device-export"
+    OTHER = "other"
+    RCV_ROUND = "rcv-round"
 
 
 class ReportingUnitType(Enum):
-    combined_precinct = "combined-precinct"
-    other = "other"
-    polling_place = "polling-place"
-    precinct = "precinct"
-    split_precinct = "split-precinct"
-    vote_center = "vote-center"
+    COMBINED_PRECINCT = "combined-precinct"
+    OTHER = "other"
+    POLLING_PLACE = "polling-place"
+    PRECINCT = "precinct"
+    SPLIT_PRECINCT = "split-precinct"
+    VOTE_CENTER = "vote-center"
 
 
 class VoteVariation(Enum):
-    approval = "approval"
-    borda = "borda"
-    cumulative = "cumulative"
-    majority = "majority"
-    n_of_m = "n-of-m"
-    other = "other"
-    plurality = "plurality"
-    proportional = "proportional"
-    range = "range"
-    rcv = "rcv"
-    super_majority = "super-majority"
+    APPROVAL = "approval"
+    BORDA = "borda"
+    CUMULATIVE = "cumulative"
+    MAJORITY = "majority"
+    N_OF_M = "n-of-m"
+    OTHER = "other"
+    PLURALITY = "plurality"
+    PROPORTIONAL = "proportional"
+    RANGE = "range"
+    RCV = "rcv"
+    SUPER_MAJORITY = "super-majority"
 
 
 # --- Models
