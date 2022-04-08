@@ -7,11 +7,14 @@ from datetime import datetime
 from enum import Enum
 from typing import List, Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Extra, Field
+from pydantic import AnyUrl, Extra, Field
 from typing_extensions import Literal
+
+from electos.datamodels.nist.models.base import NistModel
 
 
 # --- Enumerations
+
 
 class AllocationStatus(Enum):
     no = 'no'
@@ -111,7 +114,8 @@ class VoteVariation(Enum):
 
 # --- Models
 
-class Annotation(BaseModel):
+
+class Annotation(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -121,7 +125,7 @@ class Annotation(BaseModel):
     TimeStamp: Optional[datetime] = None
 
 
-class Code(BaseModel):
+class Code(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -132,7 +136,7 @@ class Code(BaseModel):
     Value: str
 
 
-class File(BaseModel):
+class File(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -142,11 +146,11 @@ class File(BaseModel):
     MimeType: Optional[str] = None
 
 
-class FractionalNumber(BaseModel):
+class FractionalNumber(NistModel):
     __root__: str = Field(..., regex='([0-9]+/[1-9]+[0-9]*)|(\\.[0-9]+)')
 
 
-class Hash(BaseModel):
+class Hash(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -156,7 +160,7 @@ class Hash(BaseModel):
     Value: str
 
 
-class Image(BaseModel):
+class Image(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -166,7 +170,7 @@ class Image(BaseModel):
     MimeType: Optional[str] = None
 
 
-class ImageData(BaseModel):
+class ImageData(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -176,7 +180,7 @@ class ImageData(BaseModel):
     Location: Optional[AnyUrl] = None
 
 
-class ReportingDevice(BaseModel):
+class ReportingDevice(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -191,7 +195,7 @@ class ReportingDevice(BaseModel):
     SerialNumber: Optional[str] = None
 
 
-class GpUnit(BaseModel):
+class GpUnit(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -204,7 +208,7 @@ class GpUnit(BaseModel):
     Type: ReportingUnitType
 
 
-class BallotMeasureSelection(BaseModel):
+class BallotMeasureSelection(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -214,7 +218,7 @@ class BallotMeasureSelection(BaseModel):
     Selection: str
 
 
-class CandidateSelection(BaseModel):
+class CandidateSelection(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -225,7 +229,7 @@ class CandidateSelection(BaseModel):
     IsWriteIn: Optional[bool] = None
 
 
-class ContestSelection(BaseModel):
+class ContestSelection(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -234,7 +238,7 @@ class ContestSelection(BaseModel):
     Code: Optional[List[Code]] = Field(None, min_items=0)
 
 
-class PartySelection(BaseModel):
+class PartySelection(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -244,7 +248,7 @@ class PartySelection(BaseModel):
     PartyIds: List[str] = Field(..., min_items=1)
 
 
-class Party(BaseModel):
+class Party(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -255,7 +259,7 @@ class Party(BaseModel):
     Name: Optional[str] = None
 
 
-class Candidate(BaseModel):
+class Candidate(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -266,7 +270,7 @@ class Candidate(BaseModel):
     PartyId: Optional[str] = None
 
 
-class Contest(BaseModel):
+class Contest(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -284,7 +288,7 @@ class Contest(BaseModel):
     VoteVariation: Optional[VoteVariation] = None
 
 
-class BallotMeasureContest(BaseModel):
+class BallotMeasureContest(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -302,7 +306,7 @@ class BallotMeasureContest(BaseModel):
     VoteVariation: Optional[VoteVariation] = None
 
 
-class CandidateContest(BaseModel):
+class CandidateContest(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -323,7 +327,7 @@ class CandidateContest(BaseModel):
     VotesAllowed: Optional[int] = None
 
 
-class PartyContest(BaseModel):
+class PartyContest(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -341,7 +345,7 @@ class PartyContest(BaseModel):
     VoteVariation: Optional[VoteVariation] = None
 
 
-class RetentionContest(BaseModel):
+class RetentionContest(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -360,7 +364,7 @@ class RetentionContest(BaseModel):
     VoteVariation: Optional[VoteVariation] = None
 
 
-class CVRWriteIn(BaseModel):
+class CVRWriteIn(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -369,7 +373,7 @@ class CVRWriteIn(BaseModel):
     WriteInImage: Optional[ImageData] = None
 
 
-class SelectionPosition(BaseModel):
+class SelectionPosition(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -388,7 +392,7 @@ class SelectionPosition(BaseModel):
     Status: Optional[List[PositionStatus]] = Field(None, min_items=0)
 
 
-class CVRContestSelection(BaseModel):
+class CVRContestSelection(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -403,7 +407,7 @@ class CVRContestSelection(BaseModel):
     TotalNumberVotes: Optional[int] = None
 
 
-class CVRContest(BaseModel):
+class CVRContest(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -418,7 +422,7 @@ class CVRContest(BaseModel):
     WriteIns: Optional[int] = None
 
 
-class CVRSnapshot(BaseModel):
+class CVRSnapshot(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -431,7 +435,7 @@ class CVRSnapshot(BaseModel):
     Type: CVRType
 
 
-class CVR(BaseModel):
+class CVR(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -452,7 +456,7 @@ class CVR(BaseModel):
     UniqueId: Optional[str] = None
 
 
-class Election(BaseModel):
+class Election(NistModel):
     class Config:
         extra = Extra.forbid
 
@@ -473,7 +477,7 @@ class Election(BaseModel):
     Name: Optional[str] = None
 
 
-class CastVoteRecordReport(BaseModel):
+class CastVoteRecordReport(NistModel):
     class Config:
         extra = Extra.forbid
 
