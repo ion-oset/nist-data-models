@@ -120,9 +120,10 @@ class Annotation(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.Annotation"] = Field(..., alias="@type")
-    AdjudicatorName: Optional[List[str]] = Field(None, min_items=0)
-    Message: Optional[List[str]] = Field(None, min_items=0)
-    TimeStamp: Optional[datetime] = None
+
+    adjudicator_name: Optional[List[str]] = Field(None, min_items=0)
+    message: Optional[List[str]] = Field(None, min_items=0)
+    time_stamp: Optional[datetime] = None
 
 
 class Code(NistModel):
@@ -130,10 +131,11 @@ class Code(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.Code"] = Field(..., alias="@type")
-    Label: Optional[str] = None
-    OtherType: Optional[str] = None
-    Type: IdentifierType
-    Value: str
+
+    label: Optional[str] = None
+    other_type: Optional[str] = None
+    type: IdentifierType
+    value: str
 
 
 class File(NistModel):
@@ -141,9 +143,10 @@ class File(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.File"] = Field(..., alias="@type")
-    Data: str
-    FileName: Optional[str] = None
-    MimeType: Optional[str] = None
+
+    data: str
+    file_name: Optional[str] = None
+    mime_type: Optional[str] = None
 
 
 class FractionalNumber(NistModel):
@@ -155,9 +158,10 @@ class Hash(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.Hash"] = Field(..., alias="@type")
-    OtherType: Optional[str] = None
-    Type: HashType
-    Value: str
+
+    other_type: Optional[str] = None
+    type: HashType
+    value: str
 
 
 class Image(NistModel):
@@ -165,9 +169,10 @@ class Image(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.Image"] = Field(..., alias="@type")
-    Data: str
-    FileName: Optional[str] = None
-    MimeType: Optional[str] = None
+
+    data: str
+    file_name: Optional[str] = None
+    mime_type: Optional[str] = None
 
 
 class ImageData(NistModel):
@@ -175,9 +180,10 @@ class ImageData(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.ImageData"] = Field(..., alias="@type")
-    Hash: Optional[Hash] = None
-    Image: Optional[Image] = None
-    Location: Optional[AnyUrl] = None
+
+    hash: Optional[Hash] = None
+    image: Optional[Image] = None
+    location: Optional[AnyUrl] = None
 
 
 class ReportingDevice(NistModel):
@@ -186,13 +192,14 @@ class ReportingDevice(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.ReportingDevice"] = Field(..., alias="@type")
-    Application: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Manufacturer: Optional[str] = None
-    MarkMetricType: Optional[str] = None
-    Model: Optional[str] = None
-    Notes: Optional[List[str]] = Field(None, min_items=0)
-    SerialNumber: Optional[str] = None
+
+    application: Optional[str] = None
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    manufacturer: Optional[str] = None
+    mark_metric_type: Optional[str] = None
+    model: Optional[str] = None
+    notes: Optional[List[str]] = Field(None, min_items=0)
+    serial_number: Optional[str] = None
 
 
 class GpUnit(NistModel):
@@ -201,11 +208,12 @@ class GpUnit(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.GpUnit"] = Field(..., alias="@type")
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Name: Optional[str] = None
-    OtherType: Optional[str] = None
-    ReportingDeviceIds: Optional[List[str]] = Field(None, min_items=0)
-    Type: ReportingUnitType
+
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    name: Optional[str] = None
+    other_type: Optional[str] = None
+    reporting_device_ids: Optional[List[str]] = Field(None, min_items=0)
+    type: ReportingUnitType
 
 
 class BallotMeasureSelection(NistModel):
@@ -214,8 +222,9 @@ class BallotMeasureSelection(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.BallotMeasureSelection"] = Field(..., alias="@type")
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Selection: str
+
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    selection: str
 
 
 class CandidateSelection(NistModel):
@@ -224,9 +233,10 @@ class CandidateSelection(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.CandidateSelection"] = Field(..., alias="@type")
-    CandidateIds: Optional[List[str]] = Field(None, min_items=0)
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    IsWriteIn: Optional[bool] = None
+
+    candidate_ids: Optional[List[str]] = Field(None, min_items=0)
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    is_write_in: Optional[bool] = None
 
 
 class ContestSelection(NistModel):
@@ -244,8 +254,9 @@ class PartySelection(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.PartySelection"] = Field(..., alias="@type")
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    PartyIds: List[str] = Field(..., min_items=1)
+
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    party_ids: List[str] = Field(..., min_items=1)
 
 
 class Party(NistModel):
@@ -254,9 +265,10 @@ class Party(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.Party"] = Field(..., alias="@type")
-    Abbreviation: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Name: Optional[str] = None
+
+    abbreviation: Optional[str] = None
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    name: Optional[str] = None
 
 
 class Candidate(NistModel):
@@ -265,9 +277,10 @@ class Candidate(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.Candidate"] = Field(..., alias="@type")
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Name: Optional[str] = None
-    PartyId: Optional[str] = None
+
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    name: Optional[str] = None
+    party_id: Optional[str] = None
 
 
 class Contest(NistModel):
@@ -276,16 +289,17 @@ class Contest(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.Contest"] = Field(..., alias="@type")
-    Abbreviation: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    ContestSelection: List[
+
+    abbreviation: Optional[str] = None
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    contest_selection: List[
         Union[
             ContestSelection, PartySelection, BallotMeasureSelection, CandidateSelection
         ]
     ] = Field(..., min_items=1)
-    Name: Optional[str] = None
-    OtherVoteVariation: Optional[str] = None
-    VoteVariation: Optional[VoteVariation] = None
+    name: Optional[str] = None
+    other_vote_variation: Optional[str] = None
+    vote_variation: Optional[VoteVariation] = None
 
 
 class BallotMeasureContest(NistModel):
@@ -294,16 +308,17 @@ class BallotMeasureContest(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.BallotMeasureContest"] = Field(..., alias="@type")
-    Abbreviation: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    ContestSelection: List[
+
+    abbreviation: Optional[str] = None
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    contest_selection: List[
         Union[
             ContestSelection, PartySelection, BallotMeasureSelection, CandidateSelection
         ]
     ] = Field(..., min_items=1)
-    Name: Optional[str] = None
-    OtherVoteVariation: Optional[str] = None
-    VoteVariation: Optional[VoteVariation] = None
+    name: Optional[str] = None
+    other_vote_variation: Optional[str] = None
+    vote_variation: Optional[VoteVariation] = None
 
 
 class CandidateContest(NistModel):
@@ -312,19 +327,20 @@ class CandidateContest(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.CandidateContest"] = Field(..., alias="@type")
-    Abbreviation: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    ContestSelection: List[
+
+    abbreviation: Optional[str] = None
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    contest_selection: List[
         Union[
             ContestSelection, PartySelection, BallotMeasureSelection, CandidateSelection
         ]
     ] = Field(..., min_items=1)
-    Name: Optional[str] = None
-    NumberElected: Optional[int] = None
-    OtherVoteVariation: Optional[str] = None
-    PrimaryPartyId: Optional[str] = None
-    VoteVariation: Optional[VoteVariation] = None
-    VotesAllowed: Optional[int] = None
+    name: Optional[str] = None
+    number_elected: Optional[int] = None
+    other_vote_variation: Optional[str] = None
+    primary_party_id: Optional[str] = None
+    vote_variation: Optional[VoteVariation] = None
+    votes_allowed: Optional[int] = None
 
 
 class PartyContest(NistModel):
@@ -333,16 +349,17 @@ class PartyContest(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.PartyContest"] = Field(..., alias="@type")
-    Abbreviation: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    ContestSelection: List[
+
+    abbreviation: Optional[str] = None
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    contest_selection: List[
         Union[
             ContestSelection, PartySelection, BallotMeasureSelection, CandidateSelection
         ]
     ] = Field(..., min_items=1)
-    Name: Optional[str] = None
-    OtherVoteVariation: Optional[str] = None
-    VoteVariation: Optional[VoteVariation] = None
+    name: Optional[str] = None
+    other_vote_variation: Optional[str] = None
+    vote_variation: Optional[VoteVariation] = None
 
 
 class RetentionContest(NistModel):
@@ -351,17 +368,18 @@ class RetentionContest(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.RetentionContest"] = Field(..., alias="@type")
-    Abbreviation: Optional[str] = None
-    CandidateId: Optional[str] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    ContestSelection: List[
+
+    abbreviation: Optional[str] = None
+    candidate_id: Optional[str] = None
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    contest_selection: List[
         Union[
             ContestSelection, PartySelection, BallotMeasureSelection, CandidateSelection
         ]
     ] = Field(..., min_items=1)
-    Name: Optional[str] = None
-    OtherVoteVariation: Optional[str] = None
-    VoteVariation: Optional[VoteVariation] = None
+    name: Optional[str] = None
+    other_vote_variation: Optional[str] = None
+    vote_variation: Optional[VoteVariation] = None
 
 
 class CVRWriteIn(NistModel):
@@ -369,8 +387,9 @@ class CVRWriteIn(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.CVRWriteIn"] = Field(..., alias="@type")
-    Text: Optional[str] = None
-    WriteInImage: Optional[ImageData] = None
+
+    text: Optional[str] = None
+    write_in_image: Optional[ImageData] = None
 
 
 class SelectionPosition(NistModel):
@@ -378,18 +397,19 @@ class SelectionPosition(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.SelectionPosition"] = Field(..., alias="@type")
-    CVRWriteIn: Optional[CVRWriteIn] = None
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    FractionalVotes: Optional[FractionalNumber] = None
-    HasIndication: IndicationStatus
-    IsAllocable: Optional[AllocationStatus] = None
-    IsGenerated: Optional[bool] = None
-    MarkMetricValue: Optional[List[str]] = Field(None, min_items=0)
-    NumberVotes: int
-    OtherStatus: Optional[str] = None
-    Position: Optional[int] = None
-    Rank: Optional[int] = None
-    Status: Optional[List[PositionStatus]] = Field(None, min_items=0)
+
+    c_v_r_write_in: Optional[CVRWriteIn] = None
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    fractional_votes: Optional[FractionalNumber] = None
+    has_indication: IndicationStatus
+    is_allocable: Optional[AllocationStatus] = None
+    is_generated: Optional[bool] = None
+    mark_metric_value: Optional[List[str]] = Field(None, min_items=0)
+    number_votes: int
+    other_status: Optional[str] = None
+    position: Optional[int] = None
+    rank: Optional[int] = None
+    status: Optional[List[PositionStatus]] = Field(None, min_items=0)
 
 
 class CVRContestSelection(NistModel):
@@ -397,14 +417,15 @@ class CVRContestSelection(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.CVRContestSelection"] = Field(..., alias="@type")
-    ContestSelectionId: Optional[str] = None
-    OptionPosition: Optional[int] = None
-    OtherStatus: Optional[str] = None
-    Rank: Optional[int] = None
-    SelectionPosition: List[SelectionPosition] = Field(..., min_items=1)
-    Status: Optional[List[ContestSelectionStatus]] = Field(None, min_items=0)
-    TotalFractionalVotes: Optional[FractionalNumber] = None
-    TotalNumberVotes: Optional[int] = None
+
+    contest_selection_id: Optional[str] = None
+    option_position: Optional[int] = None
+    other_status: Optional[str] = None
+    rank: Optional[int] = None
+    selection_position: List[SelectionPosition] = Field(..., min_items=1)
+    status: Optional[List[ContestSelectionStatus]] = Field(None, min_items=0)
+    total_fractional_votes: Optional[FractionalNumber] = None
+    total_number_votes: Optional[int] = None
 
 
 class CVRContest(NistModel):
@@ -412,14 +433,15 @@ class CVRContest(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.CVRContest"] = Field(..., alias="@type")
-    CVRContestSelection: Optional[List[CVRContestSelection]] = Field(None, min_items=0)
-    ContestId: str
-    OtherStatus: Optional[str] = None
-    Overvotes: Optional[int] = None
-    Selections: Optional[int] = None
-    Status: Optional[List[ContestStatus]] = Field(None, min_items=0)
-    Undervotes: Optional[int] = None
-    WriteIns: Optional[int] = None
+
+    c_v_r_contest_selection: Optional[List[CVRContestSelection]] = Field(None, min_items=0)
+    contest_id: str
+    other_status: Optional[str] = None
+    overvotes: Optional[int] = None
+    selections: Optional[int] = None
+    status: Optional[List[ContestStatus]] = Field(None, min_items=0)
+    undervotes: Optional[int] = None
+    write_ins: Optional[int] = None
 
 
 class CVRSnapshot(NistModel):
@@ -428,11 +450,12 @@ class CVRSnapshot(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.CVRSnapshot"] = Field(..., alias="@type")
-    Annotation: Optional[List[Annotation]] = Field(None, min_items=0)
-    CVRContest: Optional[List[CVRContest]] = Field(None, min_items=0)
-    OtherStatus: Optional[str] = None
-    Status: Optional[List[CVRStatus]] = Field(None, min_items=0)
-    Type: CVRType
+
+    annotation: Optional[List[Annotation]] = Field(None, min_items=0)
+    c_v_r_contest: Optional[List[CVRContest]] = Field(None, min_items=0)
+    other_status: Optional[str] = None
+    status: Optional[List[CVRStatus]] = Field(None, min_items=0)
+    type: CVRType
 
 
 class CVR(NistModel):
@@ -440,20 +463,21 @@ class CVR(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.CVR"] = Field(..., alias="@type")
-    BallotAuditId: Optional[str] = None
-    BallotImage: Optional[List[ImageData]] = Field(None, min_items=0)
-    BallotPrePrintedId: Optional[str] = None
-    BallotSheetId: Optional[str] = None
-    BallotStyleId: Optional[str] = None
-    BallotStyleUnitId: Optional[str] = None
-    BatchId: Optional[str] = None
-    BatchSequenceId: Optional[int] = None
-    CVRSnapshot: List[CVRSnapshot] = Field(..., min_items=1)
-    CreatingDeviceId: Optional[str] = None
-    CurrentSnapshotId: str
-    ElectionId: str
-    PartyIds: Optional[List[str]] = Field(None, min_items=0)
-    UniqueId: Optional[str] = None
+
+    ballot_audit_id: Optional[str] = None
+    ballot_image: Optional[List[ImageData]] = Field(None, min_items=0)
+    ballot_pre_printed_id: Optional[str] = None
+    ballot_sheet_id: Optional[str] = None
+    ballot_style_id: Optional[str] = None
+    ballot_style_unit_id: Optional[str] = None
+    batch_id: Optional[str] = None
+    batch_sequence_id: Optional[int] = None
+    c_v_r_snapshot: List[CVRSnapshot] = Field(..., min_items=1)
+    creating_device_id: Optional[str] = None
+    current_snapshot_id: str
+    election_id: str
+    party_ids: Optional[List[str]] = Field(None, min_items=0)
+    unique_id: Optional[str] = None
 
 
 class Election(NistModel):
@@ -462,9 +486,10 @@ class Election(NistModel):
 
     _id: str = Field(..., alias="@id")
     _type: Literal["CVR.Election"] = Field(..., alias="@type")
-    Candidate: Optional[List[Candidate]] = Field(None, min_items=0)
-    Code: Optional[List[Code]] = Field(None, min_items=0)
-    Contest: List[
+
+    candidate: Optional[List[Candidate]] = Field(None, min_items=0)
+    code: Optional[List[Code]] = Field(None, min_items=0)
+    contest: List[
         Union[
             Contest,
             PartyContest,
@@ -473,8 +498,8 @@ class Election(NistModel):
             RetentionContest,
         ]
     ] = Field(..., min_items=1)
-    ElectionScopeId: str
-    Name: Optional[str] = None
+    election_scope_id: str
+    name: Optional[str] = None
 
 
 class CastVoteRecordReport(NistModel):
@@ -482,14 +507,15 @@ class CastVoteRecordReport(NistModel):
         extra = Extra.forbid
 
     _type: Literal["CVR.CastVoteRecordReport"] = Field(..., alias="@type")
-    CVR: Optional[List[CVR]] = Field(None, min_items=0)
-    Election: List[Election] = Field(..., min_items=1)
-    GeneratedDate: datetime
-    GpUnit: List[GpUnit] = Field(..., min_items=1)
-    Notes: Optional[str] = None
-    OtherReportType: Optional[str] = None
-    Party: Optional[List[Party]] = Field(None, min_items=0)
-    ReportGeneratingDeviceIds: List[str] = Field(..., min_items=1)
-    ReportType: Optional[List[ReportType]] = Field(None, min_items=0)
-    ReportingDevice: List[ReportingDevice] = Field(..., min_items=1)
-    Version: CastVoteRecordVersion
+
+    c_v_r: Optional[List[CVR]] = Field(None, min_items=0)
+    election: List[Election] = Field(..., min_items=1)
+    generated_date: datetime
+    gp_unit: List[GpUnit] = Field(..., min_items=1)
+    notes: Optional[str] = None
+    other_report_type: Optional[str] = None
+    party: Optional[List[Party]] = Field(None, min_items=0)
+    report_generating_device_ids: List[str] = Field(..., min_items=1)
+    report_type: Optional[List[ReportType]] = Field(None, min_items=0)
+    reporting_device: List[ReportingDevice] = Field(..., min_items=1)
+    version: CastVoteRecordVersion
