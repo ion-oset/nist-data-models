@@ -19,8 +19,10 @@ class _NistModelConfig:
     """Settings that apply to all NistModels and subtypes."""
 
     # Replace leading '@' character in JSON Schema field names.
+    # This cannot be the default of '_': Pydantic can't serialize those fields.
+    # Note: Consider 'PrivateAttr'?
 
-    _AT_PREFIX = "_"
+    _AT_PREFIX = "model__"
 
     def _field_name_alias(field_name, at_prefix = _AT_PREFIX):
         """Convert fieldnames:

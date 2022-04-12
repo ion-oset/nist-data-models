@@ -119,7 +119,7 @@ class Annotation(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.Annotation"] = Field(..., alias="@type")
+    model__type: Literal["CVR.Annotation"] = Field(..., alias="@type")
 
     adjudicator_name: Optional[List[str]] = Field(None, min_items=0)
     message: Optional[List[str]] = Field(None, min_items=0)
@@ -130,7 +130,7 @@ class Code(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.Code"] = Field(..., alias="@type")
+    model__type: Literal["CVR.Code"] = Field(..., alias="@type")
 
     label: Optional[str] = None
     other_type: Optional[str] = None
@@ -142,7 +142,7 @@ class File(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.File"] = Field(..., alias="@type")
+    model__type: Literal["CVR.File"] = Field(..., alias="@type")
 
     data: str
     file_name: Optional[str] = None
@@ -157,7 +157,7 @@ class Hash(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.Hash"] = Field(..., alias="@type")
+    model__type: Literal["CVR.Hash"] = Field(..., alias="@type")
 
     other_type: Optional[str] = None
     type: HashType
@@ -168,7 +168,7 @@ class Image(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.Image"] = Field(..., alias="@type")
+    model__type: Literal["CVR.Image"] = Field(..., alias="@type")
 
     data: str
     file_name: Optional[str] = None
@@ -179,7 +179,7 @@ class ImageData(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.ImageData"] = Field(..., alias="@type")
+    model__type: Literal["CVR.ImageData"] = Field(..., alias="@type")
 
     hash: Optional[Hash] = None
     image: Optional[Image] = None
@@ -190,8 +190,8 @@ class ReportingDevice(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.ReportingDevice"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.ReportingDevice"] = Field(..., alias="@type")
 
     application: Optional[str] = None
     code: Optional[List[Code]] = Field(None, min_items=0)
@@ -206,8 +206,8 @@ class GpUnit(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.GpUnit"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.GpUnit"] = Field(..., alias="@type")
 
     code: Optional[List[Code]] = Field(None, min_items=0)
     name: Optional[str] = None
@@ -220,8 +220,8 @@ class BallotMeasureSelection(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.BallotMeasureSelection"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.BallotMeasureSelection"] = Field(..., alias="@type")
 
     code: Optional[List[Code]] = Field(None, min_items=0)
     selection: str
@@ -231,8 +231,8 @@ class CandidateSelection(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.CandidateSelection"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.CandidateSelection"] = Field(..., alias="@type")
 
     candidate_ids: Optional[List[str]] = Field(None, min_items=0)
     code: Optional[List[Code]] = Field(None, min_items=0)
@@ -243,8 +243,8 @@ class ContestSelection(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.ContestSelection"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.ContestSelection"] = Field(..., alias="@type")
     Code: Optional[List[Code]] = Field(None, min_items=0)
 
 
@@ -252,8 +252,8 @@ class PartySelection(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.PartySelection"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.PartySelection"] = Field(..., alias="@type")
 
     code: Optional[List[Code]] = Field(None, min_items=0)
     party_ids: List[str] = Field(..., min_items=1)
@@ -263,8 +263,8 @@ class Party(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.Party"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.Party"] = Field(..., alias="@type")
 
     abbreviation: Optional[str] = None
     code: Optional[List[Code]] = Field(None, min_items=0)
@@ -275,8 +275,8 @@ class Candidate(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.Candidate"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.Candidate"] = Field(..., alias="@type")
 
     code: Optional[List[Code]] = Field(None, min_items=0)
     name: Optional[str] = None
@@ -287,8 +287,8 @@ class Contest(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.Contest"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.Contest"] = Field(..., alias="@type")
 
     abbreviation: Optional[str] = None
     code: Optional[List[Code]] = Field(None, min_items=0)
@@ -306,8 +306,8 @@ class BallotMeasureContest(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.BallotMeasureContest"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.BallotMeasureContest"] = Field(..., alias="@type")
 
     abbreviation: Optional[str] = None
     code: Optional[List[Code]] = Field(None, min_items=0)
@@ -325,8 +325,8 @@ class CandidateContest(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.CandidateContest"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.CandidateContest"] = Field(..., alias="@type")
 
     abbreviation: Optional[str] = None
     code: Optional[List[Code]] = Field(None, min_items=0)
@@ -347,8 +347,8 @@ class PartyContest(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.PartyContest"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.PartyContest"] = Field(..., alias="@type")
 
     abbreviation: Optional[str] = None
     code: Optional[List[Code]] = Field(None, min_items=0)
@@ -366,8 +366,8 @@ class RetentionContest(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.RetentionContest"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.RetentionContest"] = Field(..., alias="@type")
 
     abbreviation: Optional[str] = None
     candidate_id: Optional[str] = None
@@ -386,7 +386,7 @@ class CVRWriteIn(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.CVRWriteIn"] = Field(..., alias="@type")
+    model__type: Literal["CVR.CVRWriteIn"] = Field(..., alias="@type")
 
     text: Optional[str] = None
     write_in_image: Optional[ImageData] = None
@@ -396,7 +396,7 @@ class SelectionPosition(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.SelectionPosition"] = Field(..., alias="@type")
+    model__type: Literal["CVR.SelectionPosition"] = Field(..., alias="@type")
 
     c_v_r_write_in: Optional[CVRWriteIn] = None
     code: Optional[List[Code]] = Field(None, min_items=0)
@@ -416,7 +416,7 @@ class CVRContestSelection(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.CVRContestSelection"] = Field(..., alias="@type")
+    model__type: Literal["CVR.CVRContestSelection"] = Field(..., alias="@type")
 
     contest_selection_id: Optional[str] = None
     option_position: Optional[int] = None
@@ -432,7 +432,7 @@ class CVRContest(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.CVRContest"] = Field(..., alias="@type")
+    model__type: Literal["CVR.CVRContest"] = Field(..., alias="@type")
 
     c_v_r_contest_selection: Optional[List[CVRContestSelection]] = Field(None, min_items=0)
     contest_id: str
@@ -448,8 +448,8 @@ class CVRSnapshot(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.CVRSnapshot"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.CVRSnapshot"] = Field(..., alias="@type")
 
     annotation: Optional[List[Annotation]] = Field(None, min_items=0)
     c_v_r_contest: Optional[List[CVRContest]] = Field(None, min_items=0)
@@ -462,7 +462,7 @@ class CVR(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.CVR"] = Field(..., alias="@type")
+    model__type: Literal["CVR.CVR"] = Field(..., alias="@type")
 
     ballot_audit_id: Optional[str] = None
     ballot_image: Optional[List[ImageData]] = Field(None, min_items=0)
@@ -484,8 +484,8 @@ class Election(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _id: str = Field(..., alias="@id")
-    _type: Literal["CVR.Election"] = Field(..., alias="@type")
+    model__id: str = Field(..., alias="@id")
+    model__type: Literal["CVR.Election"] = Field(..., alias="@type")
 
     candidate: Optional[List[Candidate]] = Field(None, min_items=0)
     code: Optional[List[Code]] = Field(None, min_items=0)
@@ -506,7 +506,7 @@ class CastVoteRecordReport(NistModel):
     class Config:
         extra = Extra.forbid
 
-    _type: Literal["CVR.CastVoteRecordReport"] = Field(..., alias="@type")
+    model__type: Literal["CVR.CastVoteRecordReport"] = Field(..., alias="@type")
 
     c_v_r: Optional[List[CVR]] = Field(None, min_items=0)
     election: List[Election] = Field(..., min_items=1)
