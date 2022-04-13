@@ -40,6 +40,11 @@ class _NistModelConfig:
     # Convert field names.
     alias_generator = _field_name_alias
 
+    # Unknown attributes should cause validation to fail.
+    # Defined in the JSON Schema using 'additionalProperties'.
+    # All NIST-1500 election schemas set 'additionalProperties' to false.
+    extra = pydantic.Extra.forbid
+
 
 class NistModel(pydantic.BaseModel):
 

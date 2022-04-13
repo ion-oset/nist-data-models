@@ -116,8 +116,6 @@ class VoteVariation(Enum):
 
 
 class Annotation(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.Annotation"] = Field(..., alias="@type")
 
@@ -127,8 +125,6 @@ class Annotation(NistModel):
 
 
 class Code(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.Code"] = Field(..., alias="@type")
 
@@ -139,8 +135,6 @@ class Code(NistModel):
 
 
 class File(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.File"] = Field(..., alias="@type")
 
@@ -150,12 +144,11 @@ class File(NistModel):
 
 
 class FractionalNumber(NistModel):
+
     __root__: str = Field(..., regex="([0-9]+/[1-9]+[0-9]*)|(\\.[0-9]+)")
 
 
 class Hash(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.Hash"] = Field(..., alias="@type")
 
@@ -165,8 +158,6 @@ class Hash(NistModel):
 
 
 class Image(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.Image"] = Field(..., alias="@type")
 
@@ -176,8 +167,6 @@ class Image(NistModel):
 
 
 class ImageData(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.ImageData"] = Field(..., alias="@type")
 
@@ -187,8 +176,6 @@ class ImageData(NistModel):
 
 
 class ReportingDevice(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.ReportingDevice"] = Field(..., alias="@type")
@@ -203,8 +190,6 @@ class ReportingDevice(NistModel):
 
 
 class GpUnit(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.GpUnit"] = Field(..., alias="@type")
@@ -217,8 +202,6 @@ class GpUnit(NistModel):
 
 
 class BallotMeasureSelection(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.BallotMeasureSelection"] = Field(..., alias="@type")
@@ -228,8 +211,6 @@ class BallotMeasureSelection(NistModel):
 
 
 class CandidateSelection(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.CandidateSelection"] = Field(..., alias="@type")
@@ -240,8 +221,6 @@ class CandidateSelection(NistModel):
 
 
 class ContestSelection(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.ContestSelection"] = Field(..., alias="@type")
@@ -249,8 +228,6 @@ class ContestSelection(NistModel):
 
 
 class PartySelection(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.PartySelection"] = Field(..., alias="@type")
@@ -260,8 +237,6 @@ class PartySelection(NistModel):
 
 
 class Party(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.Party"] = Field(..., alias="@type")
@@ -272,8 +247,6 @@ class Party(NistModel):
 
 
 class Candidate(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.Candidate"] = Field(..., alias="@type")
@@ -284,8 +257,6 @@ class Candidate(NistModel):
 
 
 class Contest(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.Contest"] = Field(..., alias="@type")
@@ -303,8 +274,6 @@ class Contest(NistModel):
 
 
 class BallotMeasureContest(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.BallotMeasureContest"] = Field(..., alias="@type")
@@ -322,8 +291,6 @@ class BallotMeasureContest(NistModel):
 
 
 class CandidateContest(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.CandidateContest"] = Field(..., alias="@type")
@@ -344,8 +311,6 @@ class CandidateContest(NistModel):
 
 
 class PartyContest(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.PartyContest"] = Field(..., alias="@type")
@@ -363,8 +328,6 @@ class PartyContest(NistModel):
 
 
 class RetentionContest(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.RetentionContest"] = Field(..., alias="@type")
@@ -383,8 +346,6 @@ class RetentionContest(NistModel):
 
 
 class CVRWriteIn(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.CVRWriteIn"] = Field(..., alias="@type")
 
@@ -393,8 +354,6 @@ class CVRWriteIn(NistModel):
 
 
 class SelectionPosition(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.SelectionPosition"] = Field(..., alias="@type")
 
@@ -413,8 +372,6 @@ class SelectionPosition(NistModel):
 
 
 class CVRContestSelection(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.CVRContestSelection"] = Field(..., alias="@type")
 
@@ -429,8 +386,6 @@ class CVRContestSelection(NistModel):
 
 
 class CVRContest(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.CVRContest"] = Field(..., alias="@type")
 
@@ -445,8 +400,6 @@ class CVRContest(NistModel):
 
 
 class CVRSnapshot(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.CVRSnapshot"] = Field(..., alias="@type")
@@ -459,8 +412,6 @@ class CVRSnapshot(NistModel):
 
 
 class CVR(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.CVR"] = Field(..., alias="@type")
 
@@ -481,8 +432,6 @@ class CVR(NistModel):
 
 
 class Election(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__id: str = Field(..., alias="@id")
     model__type: Literal["CVR.Election"] = Field(..., alias="@type")
@@ -503,8 +452,6 @@ class Election(NistModel):
 
 
 class CastVoteRecordReport(NistModel):
-    class Config:
-        extra = Extra.forbid
 
     model__type: Literal["CVR.CastVoteRecordReport"] = Field(..., alias="@type")
 
