@@ -2,16 +2,7 @@ import re
 
 import pydantic
 
-
-def _split_snake_case(text):
-    """Tokenize a string using underscores as delimiters."""
-    for match in re.finditer("(^_+|[A-Za-z][A-Za-z0-9]*)", text):
-        yield match.group(0)
-
-
-def _snake_to_camel(text):
-    """Convert text in 'snake_case' to 'CamelCase'."""
-    return "".join(part.capitalize() for part in _split_snake_case(text))
+from electos.datamodels.nist.utility.cases import Cases
 
 
 class _NistModelConfig:
@@ -38,7 +29,7 @@ class _NistModelConfig:
         elif field_name.startswith("__"):
             alias = field_name
         else:
-            alias = _snake_to_camel(field_name)
+            alias = Cases.snake_to_camel(field_name)
         return alias
 
     # Convert field names.
