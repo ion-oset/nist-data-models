@@ -29,10 +29,14 @@ class _NistModelConfig:
 
         - Assume snake case for fields, use camel case for serialized JSON.
         - Set the prefix that maps to '@'-prefix schema keys (e.g. '@type').
+        - Doesn't alias Pydantic custom root types: that breaks construction.
+          See: https://pydantic.helpmanual.io/usage/models/#custom-root-types
         """
         if field_name.startswith(at_prefix):
             n = len(at_prefix)
             alias = f"@{field_name[n:]}"
+        elif field_name.startswith("__"):
+            alias = field_name
         else:
             alias = _snake_to_camel(field_name)
         return alias
