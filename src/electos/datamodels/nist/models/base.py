@@ -45,6 +45,10 @@ class _NistModelConfig:
     # All NIST-1500 election schemas set 'additionalProperties' to false.
     extra = pydantic.Extra.forbid
 
+    # Strict type checking of assignment to fields.
+    # Enables assembling a model one step at a time.
+    validate_assignment = True
+
 
 class NistModel(pydantic.BaseModel):
 
