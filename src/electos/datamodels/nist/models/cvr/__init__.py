@@ -357,7 +357,7 @@ class SelectionPosition(NistModel):
 
     model__type: Literal["CVR.SelectionPosition"] = Field(..., alias="@type")
 
-    c_v_r_write_in: Optional[CVRWriteIn] = None
+    cvr_write_in: Optional[CVRWriteIn] = Field(None, alias = "CVRWriteIn")
     code: Optional[List[Code]] = Field(None, min_items=0)
     fractional_votes: Optional[FractionalNumber] = None
     has_indication: IndicationStatus
@@ -389,7 +389,7 @@ class CVRContest(NistModel):
 
     model__type: Literal["CVR.CVRContest"] = Field(..., alias="@type")
 
-    c_v_r_contest_selection: Optional[List[CVRContestSelection]] = Field(None, min_items=0)
+    cvr_contest_selection: Optional[List[CVRContestSelection]] = Field(None, min_items=0, alias = "CVRContestSelection")
     contest_id: str
     other_status: Optional[str] = None
     overvotes: Optional[int] = None
@@ -405,7 +405,7 @@ class CVRSnapshot(NistModel):
     model__type: Literal["CVR.CVRSnapshot"] = Field(..., alias="@type")
 
     annotation: Optional[List[Annotation]] = Field(None, min_items=0)
-    c_v_r_contest: Optional[List[CVRContest]] = Field(None, min_items=0)
+    cvr_contest: Optional[List[CVRContest]] = Field(None, min_items=0, alias = "CVRContest")
     other_status: Optional[str] = None
     status: Optional[List[CVRStatus]] = Field(None, min_items=0)
     type: CVRType
@@ -423,7 +423,7 @@ class CVR(NistModel):
     ballot_style_unit_id: Optional[str] = None
     batch_id: Optional[str] = None
     batch_sequence_id: Optional[int] = None
-    c_v_r_snapshot: List[CVRSnapshot] = Field(..., min_items=1)
+    cvr_snapshot: List[CVRSnapshot] = Field(..., min_items=1, alias = "CVRSnapshot")
     creating_device_id: Optional[str] = None
     current_snapshot_id: str
     election_id: str
@@ -455,7 +455,7 @@ class CastVoteRecordReport(NistModel):
 
     model__type: Literal["CVR.CastVoteRecordReport"] = Field(..., alias="@type")
 
-    c_v_r: Optional[List[CVR]] = Field(None, min_items=0)
+    cvr: Optional[List[CVR]] = Field(None, min_items=0, alias = "CVR")
     election: List[Election] = Field(..., min_items=1)
     generated_date: datetime
     gp_unit: List[GpUnit] = Field(..., min_items=1)
