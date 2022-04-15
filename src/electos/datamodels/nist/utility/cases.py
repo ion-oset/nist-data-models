@@ -31,7 +31,11 @@ class Cases:
         """
         match = re.match("^_*[A-Z]", text)
         if match:
-            for match in re.finditer("(_*[A-Z][a-z0-9_]*)", text):
+            for match in re.finditer(
+                # "(_*(?:[A-Z]+(?![a-z0-9])|[A-Z][a-z0-9]+))",
+                "(_*(?:[A-Z]+(?![a-z])|[A-Z][a-z0-9]+|[_a-z0-9]+))",
+                text
+            ):
                 yield match.group(0)
 
 

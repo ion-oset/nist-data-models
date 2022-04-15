@@ -11,15 +11,23 @@ CAMEL_CASE_SPLIT_TESTS = [
     ( "a",      () ),
     ( "ab",     () ),
     ( "aB",     () ),
-    ( "Ab",     ( "Ab",     ) ),
+    ( "A",      ( "A", ) ),
+    ( "AB",     ( "AB", ) ),
+    ( "Ab",     ( "Ab", ) ),
+    ( "ABC",    ( "ABC", ) ),
+    ( "ABc",    ( "A", "Bc" ) ),
     ( "AbC",    ( "Ab", "C" ) ),
-    ( "A_b",    ( "A_b",    ) ),
-    ( "A_C",    ( "A_", "C" ) ),
-    ( "_A",     ( "_A",     ) ),
-    ( "_Ab",    ( "_Ab",    ) ),
+    ( "A_B",    ( "A", "_B" ) ),
+    ( "A_BC",   ( "A", "_BC" ) ),
+    ( "A_Bc",   ( "A", "_Bc" ) ),
+    ( "A_b",    ( "A", "_b") ),
+    ( "A_bc",   ( "A", "_bc") ),
     ( "_a",     () ),
     ( "_aB",    () ),
-    ( "_A_C",   ( "_A_", "C" ) ),
+    ( "_A",     ( "_A", ) ),
+    ( "_Ab",    ( "_Ab", ) ),
+    ( "_A_B",   ( "_A", "_B" ) ),
+    ( "_A_Bc",  ( "_A", "_Bc" ) ),
 ]
 
 
@@ -51,10 +59,16 @@ SNAKE_CASE_SPLIT_TESTS = [
 CAMEL_TO_SNAKE_TESTS = [
     ( "A",          "a" ),
     ( "Ab",         "ab" ),
-    ( "AB",         "a_b" ),
+    ( "Abc",        "abc" ),
+    ( "AB",         "ab" ),
     ( "ABc",        "a_bc" ),
-    ( "ABC",        "a_b_c" ),
+    ( "AbC",        "ab_c" ),
+    ( "ABC",        "abc" ),
     ( "AbcDefGhi",  "abc_def_ghi" ),
+    ( "ABCDefGhi",  "abc_def_ghi" ),
+    ( "Abc123",     "abc123"),
+    ( "ABC123",     "abc_123"),
+    ( "AbC123",     "ab_c_123"),
 ]
 
 
@@ -64,6 +78,7 @@ SNAKE_TO_CAMEL_TESTS = [
     ( "abc",         "Abc" ),
     ( "a_b",         "AB" ),
     ( "a_bc",        "ABc" ),
+    ( "ab_c",        "AbC" ),
     ( "abc_def_ghi", "AbcDefGhi" ),
 ]
 
