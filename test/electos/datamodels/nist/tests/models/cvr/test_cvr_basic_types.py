@@ -12,6 +12,7 @@ from tests.utility import raises, raises_none
 RAISES_NONE = raises_none()
 RAISES_MISSING = raises(ValidationError, match = "value_error.missing")
 RAISES_INVALID = raises(ValidationError, match = "value_error.const")
+RAISES_TYPE = raises(ValidationError, match = "type_error.")
 
 
 # --- Test data
@@ -61,8 +62,8 @@ FILE_CREATE_TESTS = [
             "@type":    "CVR.File",
             "Data":     0,
         },
-        RAISES_INVALID,
-        marks = pytest.mark.xfail,
+        RAISES_TYPE,
+        # marks = pytest.mark.xfail,
     ),
 ]
 

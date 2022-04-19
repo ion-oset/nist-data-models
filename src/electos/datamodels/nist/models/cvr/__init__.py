@@ -13,6 +13,16 @@ from typing_extensions import Literal
 from electos.datamodels.nist.models.base import NistModel
 
 
+# --- Strict Types
+
+import builtins
+from pydantic import StrictBool, StrictInt, StrictStr
+bool = StrictBool
+int = StrictInt
+# float = StrictFloat
+str = StrictStr
+
+
 # --- Enumerations
 
 
@@ -145,7 +155,7 @@ class File(NistModel):
 
 class FractionalNumber(NistModel):
 
-    __root__: str = Field(..., regex="([0-9]+/[1-9]+[0-9]*)|(\\.[0-9]+)")
+    __root__: builtins.str = Field(..., regex="([0-9]+/[1-9]+[0-9]*)|(\\.[0-9]+)")
 
 
 class Hash(NistModel):
