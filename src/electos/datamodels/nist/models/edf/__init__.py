@@ -20,7 +20,12 @@ from enum import Enum
 from typing import List, Optional, Union
 
 from pydantic import AnyUrl, Extra, Field
-from typing_extensions import Literal
+# Note: *not* StrictFloat
+from pydantic import StrictBool, StrictInt, StrictStr
+try:
+    from typing_extensions import Literal
+except:
+    from typing import Literal
 
 from electos.datamodels.nist.models.base import NistModel
 
@@ -212,15 +217,15 @@ class LanguageString(NistModel):
 
     model__type: Literal["ElectionResults.LanguageString"] = Field(..., alias="@type")
 
-    content: str
-    language: str
+    content: StrictStr
+    language: StrictStr
 
 
 class InternationalizedText(NistModel):
 
     model__type: Literal["ElectionResults.InternationalizedText"] = Field(..., alias="@type")
 
-    label: Optional[str] = None
+    label: Optional[StrictStr] = None
     text: List[LanguageString] = Field(..., min_items=1)
 
 
@@ -233,7 +238,7 @@ class SpatialExtent(NistModel):
 
     model__type: Literal["ElectionResults.SpatialExtent"] = Field(..., alias="@type")
 
-    coordinates: str
+    coordinates: StrictStr
     format: GeoSpatialFormat
 
 
@@ -254,7 +259,7 @@ class AnnotatedString(NistModel):
     model__type: Literal["ElectionResults.AnnotatedString"] = Field(..., alias="@type")
 
     annotation: Optional[ShortString] = None
-    content: str
+    content: StrictStr
 
 
 class AnnotatedUri(NistModel):
@@ -269,7 +274,7 @@ class CountStatus(NistModel):
 
     model__type: Literal["ElectionResults.CountStatus"] = Field(..., alias="@type")
 
-    other_type: Optional[str] = None
+    other_type: Optional[StrictStr] = None
     status: CountItemStatus
     type: CountItemType
 
@@ -287,9 +292,9 @@ class DeviceClass(NistModel):
 
     model__type: Literal["ElectionResults.DeviceClass"] = Field(..., alias="@type")
 
-    manufacturer: Optional[str] = None
-    model: Optional[str] = None
-    other_type: Optional[str] = None
+    manufacturer: Optional[StrictStr] = None
+    model: Optional[StrictStr] = None
+    other_type: Optional[StrictStr] = None
     type: Optional[DeviceType] = None
 
 
@@ -297,15 +302,15 @@ class ExternalIdentifier(NistModel):
 
     model__type: Literal["ElectionResults.ExternalIdentifier"] = Field(..., alias="@type")
 
-    label: Optional[str] = None
-    other_type: Optional[str] = None
+    label: Optional[StrictStr] = None
+    other_type: Optional[StrictStr] = None
     type: IdentifierType
-    value: str
+    value: StrictStr
 
 
 class Header(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.Header"] = Field(..., alias="@type")
 
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
@@ -323,7 +328,7 @@ class Hours(NistModel):
 
     day: Optional[DayType] = None
     end_time: TimeWithZone
-    label: Optional[str] = None
+    label: Optional[StrictStr] = None
     start_time: TimeWithZone
 
 
@@ -331,25 +336,25 @@ class LatLng(NistModel):
 
     model__type: Literal["ElectionResults.LatLng"] = Field(..., alias="@type")
 
-    label: Optional[str] = None
+    label: Optional[StrictStr] = None
     latitude: float
     longitude: float
-    source: Optional[str] = None
+    source: Optional[StrictStr] = None
 
 
 class Office(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.Office"] = Field(..., alias="@type")
 
     contact_information: Optional[ContactInformation] = None
     description: Optional[InternationalizedText] = None
-    election_district_id: Optional[str] = None
+    election_district_id: Optional[StrictStr] = None
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
     filing_deadline: Optional[date] = None
-    is_partisan: Optional[bool] = None
+    is_partisan: Optional[StrictBool] = None
     name: InternationalizedText
-    office_holder_person_ids: Optional[List[str]] = Field(None, min_items=0)
+    office_holder_person_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     term: Optional[Term] = None
 
 
@@ -357,9 +362,9 @@ class OfficeGroup(NistModel):
 
     model__type: Literal["ElectionResults.OfficeGroup"] = Field(..., alias="@type")
 
-    label: Optional[str] = None
-    name: str
-    office_ids: Optional[List[str]] = Field(None, min_items=0)
+    label: Optional[StrictStr] = None
+    name: StrictStr
+    office_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     sub_office_group: Optional[List["OfficeGroup"]] = None
 
 
@@ -367,15 +372,15 @@ class OrderedContest(NistModel):
 
     model__type: Literal["ElectionResults.OrderedContest"] = Field(..., alias="@type")
 
-    contest_id: str
-    ordered_contest_selection_ids: Optional[List[str]] = Field(None, min_items=0)
+    contest_id: StrictStr
+    ordered_contest_selection_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
 
 
 class OrderedHeader(NistModel):
 
     model__type: Literal["ElectionResults.OrderedHeader"] = Field(..., alias="@type")
 
-    header_id: str
+    header_id: StrictStr
     ordered_content: Optional[List[Union[OrderedContest, "OrderedHeader"]]] = None
 
 
@@ -384,30 +389,30 @@ class OtherCounts(NistModel):
     model__type: Literal["ElectionResults.OtherCounts"] = Field(..., alias="@type")
 
     device_class: Optional[DeviceClass] = None
-    gp_unit_id: str
+    gp_unit_id: StrictStr
     overvotes: Optional[float] = None
     undervotes: Optional[float] = None
-    write_ins: Optional[int] = None
+    write_ins: Optional[StrictInt] = None
 
 
 class PartyRegistration(NistModel):
 
     model__type: Literal["ElectionResults.PartyRegistration"] = Field(..., alias="@type")
 
-    count: int
-    party_id: str
+    count: StrictInt
+    party_id: StrictStr
 
 
 class ReportingDevice(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.ReportingDevice"] = Field(..., alias="@type")
 
-    composing_gp_unit_ids: Optional[List[str]] = Field(None, min_items=0)
+    composing_gp_unit_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     device_class: Optional[DeviceClass] = None
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
     name: Optional[InternationalizedText] = None
-    serial_number: Optional[str] = None
+    serial_number: Optional[StrictStr] = None
 
 
 class Schedule(NistModel):
@@ -416,10 +421,10 @@ class Schedule(NistModel):
 
     end_date: Optional[date] = None
     hours: Optional[List[Hours]] = Field(None, min_items=0)
-    is_only_by_appointment: Optional[bool] = None
-    is_or_by_appointment: Optional[bool] = None
-    is_subject_to_change: Optional[bool] = None
-    label: Optional[str] = None
+    is_only_by_appointment: Optional[StrictBool] = None
+    is_or_by_appointment: Optional[StrictBool] = None
+    is_subject_to_change: Optional[StrictBool] = None
+    label: Optional[StrictStr] = None
     start_date: Optional[date] = None
 
 
@@ -436,7 +441,7 @@ class Term(NistModel):
     model__type: Literal["ElectionResults.Term"] = Field(..., alias="@type")
 
     end_date: Optional[date] = None
-    label: Optional[str] = None
+    label: Optional[StrictStr] = None
     start_date: Optional[date] = None
     type: Optional[OfficeTermType] = None
 
@@ -447,10 +452,10 @@ class VoteCounts(NistModel):
 
     count: float
     device_class: Optional[DeviceClass] = None
-    gp_unit_id: str
-    is_suppressed_for_privacy: Optional[bool] = None
-    other_type: Optional[str] = None
-    round: Optional[int] = None
+    gp_unit_id: StrictStr
+    is_suppressed_for_privacy: Optional[StrictBool] = None
+    other_type: Optional[StrictStr] = None
+    round: Optional[StrictInt] = None
     type: CountItemType
 
 
@@ -461,25 +466,25 @@ class BallotCounts(NistModel):
 
     model__type: Literal["ElectionResults.BallotCounts"] = Field(..., alias="@type")
 
-    ballots_cast: Optional[int] = None
-    ballots_outstanding: Optional[int] = None
-    ballots_rejected: Optional[int] = None
+    ballots_cast: Optional[StrictInt] = None
+    ballots_outstanding: Optional[StrictInt] = None
+    ballots_rejected: Optional[StrictInt] = None
     device_class: Optional[DeviceClass] = None
-    gp_unit_id: str
-    is_suppressed_for_privacy: Optional[bool] = None
-    other_type: Optional[str] = None
-    round: Optional[int] = None
+    gp_unit_id: StrictStr
+    is_suppressed_for_privacy: Optional[StrictBool] = None
+    other_type: Optional[StrictStr] = None
+    round: Optional[StrictInt] = None
     type: CountItemType
 
 
 class BallotMeasureSelection(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.BallotMeasureSelection"] = Field(..., alias="@type")
 
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
     selection: InternationalizedText
-    sequence_order: Optional[int] = None
+    sequence_order: Optional[StrictInt] = None
     vote_counts: Optional[List[VoteCounts]] = Field(None, min_items=0)
 
 
@@ -488,17 +493,17 @@ class BallotStyle(NistModel):
     model__type: Literal["ElectionResults.BallotStyle"] = Field(..., alias="@type")
 
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
-    gp_unit_ids: List[str] = Field(..., min_items=1)
+    gp_unit_ids: List[StrictStr] = Field(..., min_items=1)
     image_uri: Optional[List[AnnotatedUri]] = Field(None, min_items=0)
     ordered_content: Optional[List[Union[OrderedContest, OrderedHeader]]] = Field(
         None, min_items=0
     )
-    party_ids: Optional[List[str]] = Field(None, min_items=0)
+    party_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
 
 
 class Candidate(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.Candidate"] = Field(..., alias="@type")
 
     ballot_name: InternationalizedText
@@ -506,42 +511,42 @@ class Candidate(NistModel):
     contact_information: Optional[ContactInformation] = None
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
     file_date: Optional[date] = None
-    is_incumbent: Optional[bool] = None
-    is_top_ticket: Optional[bool] = None
-    party_id: Optional[str] = None
-    person_id: Optional[str] = None
+    is_incumbent: Optional[StrictBool] = None
+    is_top_ticket: Optional[StrictBool] = None
+    party_id: Optional[StrictStr] = None
+    person_id: Optional[StrictStr] = None
     post_election_status: Optional[CandidatePostElectionStatus] = None
     pre_election_status: Optional[CandidatePreElectionStatus] = None
 
 
 class CandidateSelection(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.CandidateSelection"] = Field(..., alias="@type")
 
-    candidate_ids: Optional[List[str]] = Field(None, min_items=0)
-    endorsement_party_ids: Optional[List[str]] = Field(None, min_items=0)
-    is_write_in: Optional[bool] = None
-    sequence_order: Optional[int] = None
+    candidate_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
+    endorsement_party_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
+    is_write_in: Optional[StrictBool] = None
+    sequence_order: Optional[StrictInt] = None
     vote_counts: Optional[List[VoteCounts]] = Field(None, min_items=0)
 
 
 class Coalition(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.Coalition"] = Field(..., alias="@type")
 
     abbreviation: Optional[InternationalizedText] = None
     color: Optional[HtmlColorString] = None
     contact_information: Optional[ContactInformation] = None
-    contest_ids: Optional[List[str]] = Field(None, min_items=0)
+    contest_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
-    is_recognized_party: Optional[bool] = None
-    leader_person_ids: Optional[List[str]] = Field(None, min_items=0)
+    is_recognized_party: Optional[StrictBool] = None
+    leader_person_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     logo_uri: Optional[List[AnnotatedUri]] = Field(None, min_items=0)
     name: InternationalizedText
-    party_ids: Optional[List[str]] = Field(None, min_items=0)
-    party_scope_gp_unit_ids: Optional[List[str]] = Field(None, min_items=0)
+    party_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
+    party_scope_gp_unit_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     slogan: Optional[InternationalizedText] = None
 
 
@@ -549,13 +554,13 @@ class ContactInformation(NistModel):
 
     model__type: Literal["ElectionResults.ContactInformation"] = Field(..., alias="@type")
 
-    address_line: Optional[List[str]] = Field(None, min_items=0)
+    address_line: Optional[List[StrictStr]] = Field(None, min_items=0)
     directions: Optional[InternationalizedText] = None
     email: Optional[List[AnnotatedString]] = Field(None, min_items=0)
     fax: Optional[List[AnnotatedString]] = Field(None, min_items=0)
-    label: Optional[str] = None
+    label: Optional[StrictStr] = None
     lat_lng: Optional[LatLng] = None
-    name: Optional[str] = None
+    name: Optional[StrictStr] = None
     phone: Optional[List[AnnotatedString]] = Field(None, min_items=0)
     schedule: Optional[List[Schedule]] = Field(None, min_items=0)
     uri: Optional[List[AnnotatedUri]] = Field(None, min_items=0)
@@ -566,81 +571,81 @@ class ElectionAdministration(NistModel):
     model__type: Literal["ElectionResults.ElectionAdministration"] = Field(..., alias="@type")
 
     contact_information: Optional[ContactInformation] = None
-    election_official_person_ids: Optional[List[str]] = Field(None, min_items=0)
-    name: Optional[str] = None
+    election_official_person_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
+    name: Optional[StrictStr] = None
 
 
 class Party(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.Party"] = Field(..., alias="@type")
 
     abbreviation: Optional[InternationalizedText] = None
     color: Optional[HtmlColorString] = None
     contact_information: Optional[ContactInformation] = None
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
-    is_recognized_party: Optional[bool] = None
-    leader_person_ids: Optional[List[str]] = Field(None, min_items=0)
+    is_recognized_party: Optional[StrictBool] = None
+    leader_person_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     logo_uri: Optional[List[AnnotatedUri]] = Field(None, min_items=0)
     name: InternationalizedText
-    party_scope_gp_unit_ids: Optional[List[str]] = Field(None, min_items=0)
+    party_scope_gp_unit_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     slogan: Optional[InternationalizedText] = None
 
 
 class PartySelection(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.PartySelection"] = Field(..., alias="@type")
 
-    party_ids: List[str] = Field(..., min_items=1)
-    sequence_order: Optional[int] = None
+    party_ids: List[StrictStr] = Field(..., min_items=1)
+    sequence_order: Optional[StrictInt] = None
     vote_counts: Optional[List[VoteCounts]] = Field(None, min_items=0)
 
 
 class Person(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.Person"] = Field(..., alias="@type")
 
     contact_information: Optional[List[ContactInformation]] = Field(None, min_items=0)
     date_of_birth: Optional[date] = None
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
-    first_name: Optional[str] = None
+    first_name: Optional[StrictStr] = None
     full_name: Optional[InternationalizedText] = None
-    gender: Optional[str] = None
-    last_name: Optional[str] = None
-    middle_name: Optional[List[str]] = Field(None, min_items=0)
-    nickname: Optional[str] = None
-    party_id: Optional[str] = None
-    prefix: Optional[str] = None
+    gender: Optional[StrictStr] = None
+    last_name: Optional[StrictStr] = None
+    middle_name: Optional[List[StrictStr]] = Field(None, min_items=0)
+    nickname: Optional[StrictStr] = None
+    party_id: Optional[StrictStr] = None
+    prefix: Optional[StrictStr] = None
     profession: Optional[InternationalizedText] = None
-    suffix: Optional[str] = None
+    suffix: Optional[StrictStr] = None
     title: Optional[InternationalizedText] = None
 
 
 class ReportingUnit(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.ReportingUnit"] = Field(..., alias="@type")
 
-    authority_ids: Optional[List[str]] = Field(None, min_items=0)
-    composing_gp_unit_ids: Optional[List[str]] = Field(None, min_items=0)
+    authority_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
+    composing_gp_unit_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     contact_information: Optional[ContactInformation] = None
     count_status: Optional[List[CountStatus]] = Field(None, min_items=0)
     election_administration: Optional[ElectionAdministration] = None
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
-    is_districted: Optional[bool] = None
-    is_mail_only: Optional[bool] = None
+    is_districted: Optional[StrictBool] = None
+    is_mail_only: Optional[StrictBool] = None
     name: Optional[InternationalizedText] = None
-    number: Optional[str] = None
-    other_type: Optional[str] = None
+    number: Optional[StrictStr] = None
+    other_type: Optional[StrictStr] = None
     party_registration: Optional[List[PartyRegistration]] = Field(None, min_items=0)
     spatial_dimension: Optional[SpatialDimension] = None
-    sub_units_reported: Optional[int] = None
-    total_sub_units: Optional[int] = None
+    sub_units_reported: Optional[StrictInt] = None
+    total_sub_units: Optional[StrictInt] = None
     type: ReportingUnitType
-    voters_participated: Optional[int] = None
-    voters_registered: Optional[int] = None
+    voters_participated: Optional[StrictInt] = None
+    voters_registered: Optional[StrictInt] = None
 
 
 # Contests
@@ -648,10 +653,10 @@ class ReportingUnit(NistModel):
 
 class BallotMeasureContest(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.BallotMeasureContest"] = Field(..., alias="@type")
 
-    abbreviation: Optional[str] = None
+    abbreviation: Optional[StrictStr] = None
     ballot_sub_title: Optional[InternationalizedText] = None
     ballot_title: Optional[InternationalizedText] = None
     con_statement: Optional[InternationalizedText] = None
@@ -660,109 +665,109 @@ class BallotMeasureContest(NistModel):
     ] = Field(None, min_items=0)
     count_status: Optional[List[CountStatus]] = Field(None, min_items=0)
     effect_of_abstain: Optional[InternationalizedText] = None
-    election_district_id: str
+    election_district_id: StrictStr
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
     full_text: Optional[InternationalizedText] = None
-    has_rotation: Optional[bool] = None
+    has_rotation: Optional[StrictBool] = None
     info_uri: Optional[List[AnnotatedUri]] = Field(None, min_items=0)
-    name: str
+    name: StrictStr
     other_counts: Optional[List[OtherCounts]] = Field(None, min_items=0)
-    other_type: Optional[str] = None
-    other_vote_variation: Optional[str] = None
+    other_type: Optional[StrictStr] = None
+    other_vote_variation: Optional[StrictStr] = None
     passage_threshold: Optional[InternationalizedText] = None
     pro_statement: Optional[InternationalizedText] = None
-    sequence_order: Optional[int] = None
-    sub_units_reported: Optional[int] = None
+    sequence_order: Optional[StrictInt] = None
+    sub_units_reported: Optional[StrictInt] = None
     summary_text: Optional[InternationalizedText] = None
-    total_sub_units: Optional[int] = None
+    total_sub_units: Optional[StrictInt] = None
     type: Optional[BallotMeasureType] = None
     vote_variation: Optional[VoteVariation] = None
 
 
 class CandidateContest(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.CandidateContest"] = Field(..., alias="@type")
 
-    abbreviation: Optional[str] = None
+    abbreviation: Optional[StrictStr] = None
     ballot_sub_title: Optional[InternationalizedText] = None
     ballot_title: Optional[InternationalizedText] = None
     contest_selection: Optional[
         List[Union[PartySelection, BallotMeasureSelection, CandidateSelection]]
     ] = Field(None, min_items=0)
     count_status: Optional[List[CountStatus]] = Field(None, min_items=0)
-    election_district_id: str
+    election_district_id: StrictStr
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
-    has_rotation: Optional[bool] = None
-    name: str
-    number_elected: Optional[int] = None
-    number_runoff: Optional[int] = None
-    office_ids: Optional[List[str]] = Field(None, min_items=0)
+    has_rotation: Optional[StrictBool] = None
+    name: StrictStr
+    number_elected: Optional[StrictInt] = None
+    number_runoff: Optional[StrictInt] = None
+    office_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
     other_counts: Optional[List[OtherCounts]] = Field(None, min_items=0)
-    other_vote_variation: Optional[str] = None
-    primary_party_ids: Optional[List[str]] = Field(None, min_items=0)
-    sequence_order: Optional[int] = None
-    sub_units_reported: Optional[int] = None
-    total_sub_units: Optional[int] = None
+    other_vote_variation: Optional[StrictStr] = None
+    primary_party_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
+    sequence_order: Optional[StrictInt] = None
+    sub_units_reported: Optional[StrictInt] = None
+    total_sub_units: Optional[StrictInt] = None
     vote_variation: Optional[VoteVariation] = None
-    votes_allowed: int
+    votes_allowed: StrictInt
 
 
 class PartyContest(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.PartyContest"] = Field(..., alias="@type")
 
-    abbreviation: Optional[str] = None
+    abbreviation: Optional[StrictStr] = None
     ballot_sub_title: Optional[InternationalizedText] = None
     ballot_title: Optional[InternationalizedText] = None
     contest_selection: Optional[
         List[Union[PartySelection, BallotMeasureSelection, CandidateSelection]]
     ] = Field(None, min_items=0)
     count_status: Optional[List[CountStatus]] = Field(None, min_items=0)
-    election_district_id: str
+    election_district_id: StrictStr
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
-    has_rotation: Optional[bool] = None
-    name: str
+    has_rotation: Optional[StrictBool] = None
+    name: StrictStr
     other_counts: Optional[List[OtherCounts]] = Field(None, min_items=0)
-    other_vote_variation: Optional[str] = None
-    sequence_order: Optional[int] = None
-    sub_units_reported: Optional[int] = None
-    total_sub_units: Optional[int] = None
+    other_vote_variation: Optional[StrictStr] = None
+    sequence_order: Optional[StrictInt] = None
+    sub_units_reported: Optional[StrictInt] = None
+    total_sub_units: Optional[StrictInt] = None
     vote_variation: Optional[VoteVariation] = None
 
 
 class RetentionContest(NistModel):
 
-    model__id: str = Field(..., alias="@id")
+    model__id: StrictStr = Field(..., alias="@id")
     model__type: Literal["ElectionResults.RetentionContest"] = Field(..., alias="@type")
 
-    abbreviation: Optional[str] = None
+    abbreviation: Optional[StrictStr] = None
     ballot_sub_title: Optional[InternationalizedText] = None
     ballot_title: Optional[InternationalizedText] = None
-    candidate_id: str
+    candidate_id: StrictStr
     con_statement: Optional[InternationalizedText] = None
     contest_selection: Optional[
         List[Union[PartySelection, BallotMeasureSelection, CandidateSelection]]
     ] = Field(None, min_items=0)
     count_status: Optional[List[CountStatus]] = Field(None, min_items=0)
     effect_of_abstain: Optional[InternationalizedText] = None
-    election_district_id: str
+    election_district_id: StrictStr
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
     full_text: Optional[InternationalizedText] = None
-    has_rotation: Optional[bool] = None
+    has_rotation: Optional[StrictBool] = None
     info_uri: Optional[List[AnnotatedUri]] = Field(None, min_items=0)
-    name: str
-    office_id: Optional[str] = None
+    name: StrictStr
+    office_id: Optional[StrictStr] = None
     other_counts: Optional[List[OtherCounts]] = Field(None, min_items=0)
-    other_type: Optional[str] = None
-    other_vote_variation: Optional[str] = None
+    other_type: Optional[StrictStr] = None
+    other_vote_variation: Optional[StrictStr] = None
     passage_threshold: Optional[InternationalizedText] = None
     pro_statement: Optional[InternationalizedText] = None
-    sequence_order: Optional[int] = None
-    sub_units_reported: Optional[int] = None
+    sequence_order: Optional[StrictInt] = None
+    sub_units_reported: Optional[StrictInt] = None
     summary_text: Optional[InternationalizedText] = None
-    total_sub_units: Optional[int] = None
+    total_sub_units: Optional[StrictInt] = None
     type: Optional[BallotMeasureType] = None
     vote_variation: Optional[VoteVariation] = None
 
@@ -786,11 +791,11 @@ class Election(NistModel):
         ]
     ] = Field(None, min_items=0)
     count_status: Optional[List[CountStatus]] = Field(None, min_items=0)
-    election_scope_id: str
+    election_scope_id: StrictStr
     end_date: date
     external_identifier: Optional[List[ExternalIdentifier]] = Field(None, min_items=0)
     name: InternationalizedText
-    other_type: Optional[str] = None
+    other_type: Optional[StrictStr] = None
     start_date: date
     type: ElectionType
 
@@ -807,16 +812,16 @@ class ElectionReport(NistModel):
         None, min_items=0
     )
     header: Optional[List[Header]] = Field(None, min_items=0)
-    is_test: Optional[bool] = None
-    issuer: str
-    issuer_abbreviation: str
-    notes: Optional[str] = None
+    is_test: Optional[StrictBool] = None
+    issuer: StrictStr
+    issuer_abbreviation: StrictStr
+    notes: Optional[StrictStr] = None
     office: Optional[List[Office]] = Field(None, min_items=0)
     office_group: Optional[List[OfficeGroup]] = Field(None, min_items=0)
     party: Optional[List[Union[Party, Coalition]]] = Field(None, min_items=0)
     person: Optional[List[Person]] = Field(None, min_items=0)
-    sequence_end: int
-    sequence_start: int
+    sequence_end: StrictInt
+    sequence_start: StrictInt
     status: ResultsStatus
-    test_type: Optional[str] = None
-    vendor_application_id: str
+    test_type: Optional[StrictStr] = None
+    vendor_application_id: StrictStr
