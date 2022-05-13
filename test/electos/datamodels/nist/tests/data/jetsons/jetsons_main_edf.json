@@ -1,0 +1,617 @@
+{
+    "@type": "ElectionResults.ElectionReport",
+    "Election": [
+        {
+            "@type": "ElectionResults.Election",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Gadget County Elections",
+                        "Language": "en"
+                    }
+                ]
+            },
+            "ExternalIdentifier": [
+                {
+                    "@type": "ElectionResults.ExternalIdentifier",
+                    "Type": "local-level",
+                    "Value": "election-gadget-county"
+                }
+            ],
+            "ElectionScopeId": "gadget-county",
+            "StartDate": "2021-06-01",
+            "EndDate": "2021-06-15",
+            "Type": "general",
+            "BallotStyle": [
+                {
+                    "@type": "ElectionResults.BallotStyle",
+                    "ExternalIdentifier": [
+                        {
+                            "@type": "ElectionResults.ExternalIdentifier",
+                            "Type": "local-level",
+                            "Value": "ballot-style-bedrock-precinct"
+                        }
+                    ],
+                    "GpUnitIds": [
+                        "bedrock-precinct"
+                    ],
+                    "OrderedContent": [
+                        {
+                            "@type": "ElectionResults.OrderedHeader",
+                            "HeaderId": "header-ballot-measures",
+                            "OrderedContent": [
+                                {
+                                    "@type": "ElectionResults.OrderedContest",
+                                    "ContestId": "contest-ballot-measure-gadget-county-1"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "@type": "ElectionResults.BallotStyle",
+                    "ExternalIdentifier": [
+                        {
+                            "@type": "ElectionResults.ExternalIdentifier",
+                            "Type": "local-level",
+                            "Value": "ballot-style-downtown-precinct"
+                        }
+                    ],
+                    "GpUnitIds": [
+                        "downtown-precinct"
+                    ],
+                    "OrderedContent": [
+                        {
+                            "@type": "ElectionResults.OrderedHeader",
+                            "HeaderId": "header-mayor-orbit-city",
+                            "OrderedContent": [
+                                {
+                                    "@type": "ElectionResults.OrderedContest",
+                                    "ContestId": "contest-mayor-orbit-city"
+                                }
+                            ]
+                        },
+                        {
+                            "@type": "ElectionResults.OrderedHeader",
+                            "HeaderId": "header-ballot-measures",
+                            "OrderedContent": [
+                                {
+                                    "@type": "ElectionResults.OrderedContest",
+                                    "ContestId": "contest-ballot-measure-gadget-county-1"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "@type": "ElectionResults.BallotStyle",
+                    "ExternalIdentifier": [
+                        {
+                            "@type": "ElectionResults.ExternalIdentifier",
+                            "Type": "local-level",
+                            "Value": "ballot-style-port-precinct"
+                        }
+                    ],
+                    "GpUnitIds": [
+                        "port-precinct"
+                    ],
+                    "OrderedContent": [
+                        {
+                            "@type": "ElectionResults.OrderedHeader",
+                            "HeaderId": "header-control-board-spaceport",
+                            "OrderedContent": [
+                                {
+                                    "@type": "ElectionResults.OrderedContest",
+                                    "ContestId": "contest-control-board-spaceport"
+                                }
+                            ]
+                        },
+                        {
+                            "@type": "ElectionResults.OrderedHeader",
+                            "HeaderId": "header-ballot-measures",
+                            "OrderedContent": [
+                                {
+                                    "@type": "ElectionResults.OrderedContest",
+                                    "ContestId": "contest-ballot-measure-gadget-county-1"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "@type": "ElectionResults.BallotStyle",
+                    "ExternalIdentifier": [
+                        {
+                            "@type": "ElectionResults.ExternalIdentifier",
+                            "Type": "local-level",
+                            "Value": "ballot-style-spacetown-precinct"
+                        }
+                    ],
+                    "GpUnitIds": [
+                        "spacetown-precinct"
+                    ],
+                    "OrderedContent": [
+                        {
+                            "@type": "ElectionResults.OrderedHeader",
+                            "HeaderId": "header-mayor-orbit-city",
+                            "OrderedContent": [
+                                {
+                                    "@type": "ElectionResults.OrderedContest",
+                                    "ContestId": "contest-mayor-orbit-city"
+                                }
+                            ]
+                        },
+                        {
+                            "@type": "ElectionResults.OrderedHeader",
+                            "HeaderId": "header-control-board-spaceport",
+                            "OrderedContent": [
+                                {
+                                    "@type": "ElectionResults.OrderedContest",
+                                    "ContestId": "contest-control-board-spaceport"
+                                }
+                            ]
+                        },
+                        {
+                            "@type": "ElectionResults.OrderedHeader",
+                            "HeaderId": "header-ballot-measures",
+                            "OrderedContent": [
+                                {
+                                    "@type": "ElectionResults.OrderedContest",
+                                    "ContestId": "contest-ballot-measure-gadget-county-1"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "Candidate": [
+                {
+                    "@type": "ElectionResults.Candidate",
+                    "@id": "candidate-cosmo-spacely",
+                    "BallotName": {
+                        "@type": "ElectionResults.InternationalizedText",
+                        "Text": [
+                            {
+                                "@type": "ElectionResults.LanguageString",
+                                "Content": "Cosmo Spacely",
+                                "Language": "en"
+                            }
+                        ]
+                    },
+                    "ExternalIdentifier": [
+                        {
+                            "@type": "ElectionResults.ExternalIdentifier",
+                            "Type": "local-level",
+                            "Value": "candidate-cosmo-spacely"
+                        }
+                    ]
+                },
+                {
+                    "@type": "ElectionResults.Candidate",
+                    "@id": "candidate-spencer-cogswell",
+                    "BallotName": {
+                        "@type": "ElectionResults.InternationalizedText",
+                        "Text": [
+                            {
+                                "@type": "ElectionResults.LanguageString",
+                                "Content": "Spencer Cogswell",
+                                "Language": "en"
+                            }
+                        ]
+                    },
+                    "ExternalIdentifier": [
+                        {
+                            "@type": "ElectionResults.ExternalIdentifier",
+                            "Type": "local-level",
+                            "Value": "candidate-spencer-cogswell"
+                        }
+                    ]
+                },
+                {
+                    "@type": "ElectionResults.Candidate",
+                    "@id": "candidate-jane-jetson",
+                    "PersonId": "person-jane-jetson",
+                    "BallotName": {
+                        "@type": "ElectionResults.InternationalizedText",
+                        "Text": [
+                            {
+                                "@type": "ElectionResults.LanguageString",
+                                "Content": "Jane Jetson",
+                                "Language": "en"
+                            }
+                        ]
+                    },
+                    "ExternalIdentifier": [
+                        {
+                            "@type": "ElectionResults.ExternalIdentifier",
+                            "Type": "local-level",
+                            "Value": "candidate-jane-jetson"
+                        }
+                    ]
+                },
+                {
+                    "@type": "ElectionResults.Candidate",
+                    "@id": "candidate-harlan-ellis",
+                    "PersonId": "person-harlan-ellis",
+                    "BallotName": {
+                        "@type": "ElectionResults.InternationalizedText",
+                        "Text": [
+                            {
+                                "@type": "ElectionResults.LanguageString",
+                                "Content": "Harlan Ellis",
+                                "Language": "en"
+                            }
+                        ]
+                    },
+                    "ExternalIdentifier": [
+                        {
+                            "@type": "ElectionResults.ExternalIdentifier",
+                            "Type": "local-level",
+                            "Value": "candidate-harlan-ellis"
+                        }
+                    ]
+                },
+                {
+                    "@type": "ElectionResults.Candidate",
+                    "@id": "candidate-rudi-indexer",
+                    "PersonId": "person-rudi-indexer",
+                    "BallotName": {
+                        "@type": "ElectionResults.InternationalizedText",
+                        "Text": [
+                            {
+                                "@type": "ElectionResults.LanguageString",
+                                "Content": "Rudi Indexer",
+                                "Language": "en"
+                            }
+                        ]
+                    },
+                    "ExternalIdentifier": [
+                        {
+                            "@type": "ElectionResults.ExternalIdentifier",
+                            "Type": "local-level",
+                            "Value": "candidate-rudi-indexer"
+                        }
+                    ]
+                }
+            ],
+            "Contest": [
+                {
+                    "@type": "ElectionResults.CandidateContest",
+                    "@id": "contest-mayor-orbit-city",
+                    "Name": "Mayor of Orbit City",
+                    "ElectionDistrictId": "gadget-county",
+                    "VoteVariation": "plurality",
+                    "VotesAllowed": 1,
+                    "ContestSelection": [
+                        {
+                            "@type": "ElectionResults.CandidateSelection",
+                            "@id": "contest-mayor--selection-cosmo-spacely",
+                            "SequenceOrder": 1,
+                            "CandidateIds": [
+                                "candidate-cosmo-spacely"
+                            ],
+                            "EndorsementPartyIds": [
+                                "party-lepton"
+                            ]
+                        },
+                        {
+                            "@type": "ElectionResults.CandidateSelection",
+                            "@id": "contest-mayor--selection-spencer-cogswell",
+                            "SequenceOrder": 2,
+                            "CandidateIds": [
+                                "candidate-spencer-cogswell"
+                            ],
+                            "EndorsementPartyIds": [
+                                "party-hadron"
+                            ]
+                        },
+                        {
+                            "@type": "ElectionResults.CandidateSelection",
+                            "@id": "contest-mayor--selection-write-in",
+                            "SequenceOrder": 3,
+                            "IsWriteIn": true
+                        }
+                    ]
+                },
+                {
+                    "@type": "ElectionResults.CandidateContest",
+                    "@id": "contest-control-board-spaceport",
+                    "Name": "SpacePort Control Board",
+                    "ElectionDistrictId": "gadget-county",
+                    "VoteVariation": "n-of-m",
+                    "VotesAllowed": 2,
+                    "ContestSelection": [
+                        {
+                            "@type": "ElectionResults.CandidateSelection",
+                            "@id": "contest-control-board-spaceport--selection-jane-jetson",
+                            "SequenceOrder": 1,
+                            "CandidateIds": [
+                                "candidate-jane-jetson"
+                            ]
+                        },
+                        {
+                            "@type": "ElectionResults.CandidateSelection",
+                            "@id": "contest-control-board-spaceport--selection-harlan-ellis",
+                            "SequenceOrder": 2,
+                            "CandidateIds": [
+                                "candidate-harlan-ellis"
+                            ]
+                        },
+                        {
+                            "@type": "ElectionResults.CandidateSelection",
+                            "@id": "contest-control-board-spaceport--selection-rudi-indexer",
+                            "SequenceOrder": 3,
+                            "CandidateIds": [
+                                "candidate-rudi-indexer"
+                            ]
+                        },
+                        {
+                            "@type": "ElectionResults.CandidateSelection",
+                            "@id": "contest-control-board-spaceport--selection-write-in-1",
+                            "SequenceOrder": 4,
+                            "IsWriteIn": true
+                        },
+                        {
+                            "@type": "ElectionResults.CandidateSelection",
+                            "@id": "contest-control-board-spaceport--selection-write-in-2",
+                            "SequenceOrder": 5,
+                            "IsWriteIn": true
+                        }
+                    ]
+                },
+                {
+                    "@type": "ElectionResults.BallotMeasureContest",
+                    "@id": "contest-ballot-measure-gadget-county-1",
+                    "Name": "Shall Gadget County increase its sales tax from 1% to 1.1% for the purpose of raising additional revenue to fund expanded air traffic control operations?",
+                    "ElectionDistrictId": "gadget-county"
+                }
+            ]
+        }
+    ],
+    "Format": "summary-contest",
+    "GeneratedDate": "2021-06-01T12:00:00-08:00",
+    "GpUnit": [
+        {
+            "@type": "ElectionResults.ReportingUnit",
+            "@id": "gadget-county",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Gadget County",
+                        "Language": "en"
+                    }
+                ]
+            },
+            "Type": "county"
+        },
+        {
+            "@type": "ElectionResults.ReportingUnit",
+            "@id": "bedrock-precinct",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Bedrock Precinct",
+                        "Language": "en"
+                    }
+                ]
+            },
+            "Type": "precinct"
+        },
+        {
+            "@type": "ElectionResults.ReportingUnit",
+            "@id": "downtown-precinct",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Downtown Precinct",
+                        "Language": "en"
+                    }
+                ]
+            },
+            "Type": "precinct"
+        },
+        {
+            "@type": "ElectionResults.ReportingUnit",
+            "@id": "port-precinct",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Port Precinct",
+                        "Language": "en"
+                    }
+                ]
+            },
+            "Type": "precinct"
+        },
+        {
+            "@type": "ElectionResults.ReportingUnit",
+            "@id": "spacetown-precinct",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "SpaceTown Precinct",
+                        "Language": "en"
+                    }
+                ]
+            },
+            "Type": "precinct"
+        },
+        {
+            "@type": "ElectionResults.ReportingDevice",
+            "@id": "ballot-marker-1",
+            "DeviceClass": {
+                "@type": "ElectionResults.DeviceClass",
+                "Manufacturer": "Trust the Vote",
+                "Model": "git-c3cd6f4f-20210601",
+                "Type": "bmd"
+            },
+            "SerialNumber": "AB:CD:EF:12:34:56"
+        }
+    ],
+    "Header": [
+        {
+            "@type": "ElectionResults.Header",
+            "@id": "header-ballot-measures",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Ballot Measures",
+                        "Language": "en"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "ElectionResults.Header",
+            "@id": "header-control-board-spaceport",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "SpacePort Control Board",
+                        "Language": "en"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "ElectionResults.Header",
+            "@id": "header-mayor-orbit-city",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Mayor of Orbit City",
+                        "Language": "en"
+                    }
+                ]
+            }
+        }
+    ],
+    "Issuer": "State",
+    "IssuerAbbreviation": "US",
+    "Party": [
+        {
+            "@type": "ElectionResults.Party",
+            "@id": "party-hadron",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Hadron Party",
+                        "Language": "en"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "ElectionResults.Party",
+            "@id": "party-lepton",
+            "Name": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Lepton Party",
+                        "Language": "en"
+                    }
+                ]
+            }
+        }
+    ],
+    "Person": [
+        {
+            "@type": "ElectionResults.Person",
+            "@id": "person-jane-jetson",
+            "FullName": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Jane Jetson",
+                        "Language": "en"
+                    }
+                ]
+            },
+            "Profession": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Indepenent Consultant",
+                        "Language": "en"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "ElectionResults.Person",
+            "@id": "person-harlan-ellis",
+            "FullName": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Harlan Ellis",
+                        "Language": "en"
+                    }
+                ]
+            },
+            "Profession": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Author",
+                        "Language": "en"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "ElectionResults.Person",
+            "@id": "person-rudy-indexer",
+            "FullName": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Rudi Indexer",
+                        "Language": "en"
+                    }
+                ]
+            },
+            "Profession": {
+                "@type": "ElectionResults.InternationalizedText",
+                "Text": [
+                    {
+                        "@type": "ElectionResults.LanguageString",
+                        "Content": "Sentient Search Engine",
+                        "Language": "en"
+                    }
+                ]
+            }
+        }
+    ],
+    "SequenceEnd": 1,
+    "SequenceStart": 1,
+    "Status": "pre-election",
+    "VendorApplicationId": "TTV"
+}
