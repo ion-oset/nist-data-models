@@ -365,7 +365,40 @@
                     "@type": "ElectionResults.BallotMeasureContest",
                     "@id": "contest-ballot-measure-gadget-county-1",
                     "Name": "Shall Gadget County increase its sales tax from 1% to 1.1% for the purpose of raising additional revenue to fund expanded air traffic control operations?",
-                    "ElectionDistrictId": "gadget-county"
+                    "ElectionDistrictId": "gadget-county",
+                    "VoteVariation": "plurality",
+                    "ContestSelection": [
+                        {
+                            "@type": "ElectionResults.BallotMeasureSelection",
+                            "@id": "contest-ballot-measure-gadget-county-1--selection-yes",
+                            "SequenceOrder": 1,
+                            "Selection": {
+                                "@type": "ElectionResults.InternationalizedText",
+                                "Text": [
+                                    {
+                                        "@type": "ElectionResults.LanguageString",
+                                        "Content": "Yes",
+                                        "Language": "en"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "@type": "ElectionResults.BallotMeasureSelection",
+                            "@id": "contest-ballot-measure-gadget-county-1--selection-no",
+                            "SequenceOrder": 2,
+                            "Selection": {
+                                "@type": "ElectionResults.InternationalizedText",
+                                "Text": [
+                                    {
+                                        "@type": "ElectionResults.LanguageString",
+                                        "Content": "No",
+                                        "Language": "en"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
                 }
             ]
         }
@@ -555,7 +588,7 @@
                 "Text": [
                     {
                         "@type": "ElectionResults.LanguageString",
-                        "Content": "Indepenent Consultant",
+                        "Content": "Independent Consultant",
                         "Language": "en"
                     }
                 ]
