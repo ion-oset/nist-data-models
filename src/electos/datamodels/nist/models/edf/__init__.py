@@ -365,7 +365,9 @@ class OfficeGroup(NistModel):
     label: Optional[StrictStr] = None
     name: StrictStr
     office_ids: Optional[List[StrictStr]] = Field(None, min_items=0)
-    sub_office_group: Optional[List["OfficeGroup"]] = None
+    sub_office_group: Optional[List[OfficeGroup]] = None
+
+OfficeGroup.update_forward_refs()
 
 
 class OrderedContest(NistModel):
@@ -381,7 +383,9 @@ class OrderedHeader(NistModel):
     model__type: Literal["ElectionResults.OrderedHeader"] = Field(..., alias="@type")
 
     header_id: StrictStr
-    ordered_content: Optional[List[Union[OrderedContest, "OrderedHeader"]]] = None
+    ordered_content: Optional[List[Union[OrderedContest, OrderedHeader]]] = None
+
+OrderedHeader.update_forward_refs()
 
 
 class OtherCounts(NistModel):
