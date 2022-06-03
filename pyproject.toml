@@ -28,4 +28,6 @@ pytest = "~6.2.5"
 pytest-mock = "~3.6.0"
 coverage = "~5.5"
 # Support 'importlib.resources.files'
-importlib-resources = { version = "~5.2.2", python = "<= 3.9" }
+# Currently using the backport to workaround errors raised by standard library.
+# importlib-resources = { version = "~5.2.2", python = "<= 3.9" }
+importlib-resources = { version = "~5.2.0" }
