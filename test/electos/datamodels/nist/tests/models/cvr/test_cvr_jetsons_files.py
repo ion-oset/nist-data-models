@@ -1,12 +1,10 @@
 import pytest
 
-import json
-
 from electos.datamodels.nist.models.cvr import *
 
 from pydantic import ValidationError
 
-from tests.utility import load_test_data, raises, raises_none
+from tests.utility import load_test_json, raises, raises_none
 
 
 # --- Test data
@@ -22,8 +20,7 @@ CVR_SAMPLE_FILES = [
 def test_data(request):
     """Pre-load test data and return the ."""
     package, file = request.param
-    text = load_test_data(package, file)
-    data = json.loads(text)
+    data = load_test_json(package, file)
     return data
 
 

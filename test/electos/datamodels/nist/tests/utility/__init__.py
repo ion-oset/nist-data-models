@@ -1,3 +1,4 @@
+import json
 import os
 try:
     import importlib_resources
@@ -49,3 +50,20 @@ def load_test_data(path, file):
         data = input.read()
         return data
 
+
+def load_test_json(path, file):
+    """Load JSON files from the test data package.
+
+    Parameters:
+
+        path (Path): Path to test data package.
+            A relative path is a sub-path of the package root.
+        file (Path): Name of the test file.
+
+    Returns:
+
+        Test data found at path.
+    """
+    text = load_test_data(path, file)
+    data = json.loads(text)
+    return data
