@@ -1,7 +1,8 @@
 import pytest
 
 from electos.datamodels.nist.models.edf import ElectionReport
-from electos.datamodels.nist.indexes import ElementIndex
+from electos.datamodels.nist.indexes import DocumentIndex, ElementIndex
+from electos.datamodels.nist.indexes.document_index import IndexNode
 
 from tests.utility import load_test_json, raises, raises_none
 
@@ -30,6 +31,12 @@ def election_report(request):
 @pytest.fixture()
 def element_index(election_report):
     index = ElementIndex(election_report, EDF_NAMESPACE)
+    return index
+
+
+@pytest.fixture()
+def document_index(election_report):
+    index = DocumentIndex(election_report, EDF_NAMESPACE)
     return index
 
 
@@ -164,6 +171,8 @@ EDF_TYPE_COUNTS = [
 
 # --- Tests
 
+# Element Index
+
 @pytest.mark.parametrize("id_names", EDF_ID_NAMES)
 def test_element_id_names(id_names, element_index):
     expected = id_names
@@ -177,7 +186,8 @@ def test_element_id_types(id_types, element_index):
     actual = {}
     start = len(EDF_NAMESPACE) + 1
     for key in id_types.keys():
-        value = element_index.by_id(key).model__type[start:]
+        value = element_index.by_id(key)
+        value = value.model__type[start:]
         actual[key] = value
     assert actual == expected
 
@@ -195,6 +205,44 @@ def test_element_type_counts(type_counts, element_index):
     actual = {}
     for key in type_counts.keys():
         items = list(element_index.by_type(key))
+        value = len(items)
+        actual[key] = value
+    assert actual == expected
+
+# Document Index
+
+@pytest.mark.parametrize("id_names", EDF_ID_NAMES)
+def test_document_id_names(id_names, document_index):
+    expected = id_names
+    actual = sorted(document_index.ids())
+    assert actual == expected
+
+
+@pytest.mark.parametrize("id_types", EDF_ID_TYPES)
+def test_document_id_types(id_types, document_index):
+    expected = id_types
+    actual = {}
+    start = len(EDF_NAMESPACE) + 1
+    for key in id_types.keys():
+        value = document_index.by_id(key).value
+        value = value.model__type[start:]
+        actual[key] = value
+    assert actual == expected
+
+
+@pytest.mark.parametrize("type_names", EDF_TYPE_NAMES)
+def test_document_type_names(type_names, document_index):
+    expected = type_names
+    actual = sorted(document_index.types())
+    assert actual == expected
+
+
+@pytest.mark.parametrize("type_counts", EDF_TYPE_COUNTS)
+def test_document_type_counts(type_counts, document_index):
+    expected = type_counts
+    actual = {}
+    for key in type_counts.keys():
+        items = list(document_index.by_type(key))
         value = len(items)
         actual[key] = value
     assert actual == expected
