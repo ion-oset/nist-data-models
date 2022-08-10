@@ -250,6 +250,42 @@ EDF_TYPE_COUNTS_WITHOUT_NAMESPACE = [
 ]
 
 
+# Note: These tests are just exercising node attributes. The values chosen are
+# for relative ease of review not for any semantic reasons.
+
+EDF_DOCUMENT_INDEX_NODES = [
+    ( "bedrock-precinct", list, 1, "ElectionResults.ReportingUnit" ),
+    ( "candidate-jane-jetson", list, 2, "ElectionResults.Candidate" ),
+    ( "contest-mayor-orbit-city", list, 0, "ElectionResults.CandidateContest" ),
+    ( "party-hadron", list, 0, "ElectionResults.Party" ),
+    ( "person-harlan-ellis", list, 1, "ElectionResults.Person" ),
+]
+
+
+EDF_DOCUMENT_INDEX_NODE_STRINGS = [
+    (
+        "bedrock-precinct",
+        "model__id='bedrock-precinct' model__type='ElectionResults.ReportingUnit'"
+    ),
+    (
+        "candidate-jane-jetson",
+        "model__id='candidate-jane-jetson' model__type='ElectionResults.Candidate'"
+    ),
+    (
+        "contest-mayor-orbit-city",
+        "model__id='contest-mayor-orbit-city' model__type='ElectionResults.CandidateContest'"
+    ),
+    (
+        "party-hadron",
+        "model__id='party-hadron' model__type='ElectionResults.Party'"
+    ),
+    (
+        "person-harlan-ellis",
+        "model__id='person-harlan-ellis' model__type='ElectionResults.Person'"
+    ),
+]
+
+
 # --- Tests
 
 # Element Index
@@ -422,6 +458,24 @@ def test_document_type_counts(type_counts, document_index):
         items = list(document_index.by_type(key))
         count = len(items)
         actual[key] = count
+    assert actual == expected
+
+
+# Document IndexNodes
+
+@pytest.mark.parametrize("id, parent_type, key, value_type", EDF_DOCUMENT_INDEX_NODES)
+def test_document_index_node(id, parent_type, key, value_type, document_index):
+    expected = (parent_type, key, value_type)
+    node = document_index.by_id(id)
+    actual = (type(node.parent), node.key, node.value.model__type)
+    assert actual == expected
+
+
+@pytest.mark.parametrize("id, string", EDF_DOCUMENT_INDEX_NODE_STRINGS)
+def test_document_index_node_as_string(id, string, document_index):
+    expected = string
+    node = document_index.by_id(id)
+    actual = " ".join(str(node).split(maxsplit = 2)[0:2])
     assert actual == expected
 
 

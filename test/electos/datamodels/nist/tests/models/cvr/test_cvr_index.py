@@ -228,6 +228,42 @@ CVR_TYPE_COUNTS_WITHOUT_NAMESPACE = [
 ]
 
 
+# Note: These tests are just exercising node attributes. The values chosen are
+# for relative ease of review not for any semantic reasons.
+
+CVR_DOCUMENT_INDEX_NODES = [
+    ( "bedrock-precinct", list, 1, "CVR.GpUnit" ),
+    ( "candidate-jane-jetson", list, 2, "CVR.Candidate" ),
+    ( "contest-mayor-orbit-city", list, 0, "CVR.CandidateContest" ),
+    ( "party-hadron", list, 0, "CVR.Party" ),
+    ( "snapshot-01", list, 0, "CVR.CVRSnapshot" ),
+]
+
+
+CVR_DOCUMENT_INDEX_NODE_STRINGS = [
+    (
+        "bedrock-precinct",
+        "model__id='bedrock-precinct' model__type='CVR.GpUnit'"
+    ),
+    (
+        "candidate-jane-jetson",
+        "model__id='candidate-jane-jetson' model__type='CVR.Candidate'"
+    ),
+    (
+        "contest-mayor-orbit-city",
+        "model__id='contest-mayor-orbit-city' model__type='CVR.CandidateContest'"
+    ),
+    (
+        "party-hadron",
+        "model__id='party-hadron' model__type='CVR.Party'"
+    ),
+    (
+        "snapshot-01",
+        "model__id='snapshot-01' model__type='CVR.CVRSnapshot'"
+    ),
+]
+
+
 # --- Tests
 
 # Element Index
@@ -400,6 +436,24 @@ def test_document_type_counts(type_counts, document_index):
         items = list(document_index.by_type(key))
         count = len(items)
         actual[key] = count
+    assert actual == expected
+
+
+# Document IndexNodes
+
+@pytest.mark.parametrize("id, parent_type, key, value_type", CVR_DOCUMENT_INDEX_NODES)
+def test_document_index_node(id, parent_type, key, value_type, document_index):
+    expected = (parent_type, key, value_type)
+    node = document_index.by_id(id)
+    actual = (type(node.parent), node.key, node.value.model__type)
+    assert actual == expected
+
+
+@pytest.mark.parametrize("id, string", CVR_DOCUMENT_INDEX_NODE_STRINGS)
+def test_document_index_node_as_string(id, string, document_index):
+    expected = string
+    node = document_index.by_id(id)
+    actual = " ".join(str(node).split(maxsplit = 2)[0:2])
     assert actual == expected
 
 
