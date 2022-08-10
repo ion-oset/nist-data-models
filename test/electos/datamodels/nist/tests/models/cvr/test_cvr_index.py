@@ -1,5 +1,6 @@
 import pytest
 
+from electos.datamodels.nist.models.base import NistModel
 from electos.datamodels.nist.models.cvr import CastVoteRecordReport
 from electos.datamodels.nist.indexes import DocumentIndex, ElementIndex
 
@@ -77,6 +78,22 @@ CVR_ID_NAMES = [
 ]
 
 
+CVR_ID_NAMES_STRICT = [
+    # Exists
+    (
+        "downtown-precinct",
+        "CVR.GpUnit",
+        raises_none(),
+    ),
+    # Doesn't exist
+    (
+        "uptown-precinct",
+        None,
+        raises(KeyError),
+    ),
+]
+
+
 CVR_ID_TYPES = [
     {
         "ballot-marker-1": "ReportingDevice",
@@ -132,6 +149,22 @@ CVR_TYPE_NAMES = [
 ]
 
 
+CVR_TYPE_NAMES_STRICT = [
+    # Exists
+    (
+        "CVR.GpUnit",
+        "CVR.GpUnit",
+        raises_none(),
+    ),
+    # Doesn't exist
+    (
+        "NotARealType",
+        [],
+        raises(KeyError),
+    ),
+]
+
+
 CVR_TYPE_COUNTS = [
     {
         "CVR.BallotMeasureContest": 1,
@@ -164,6 +197,23 @@ def test_element_id_names(id_names, element_index):
     assert actual == expected
 
 
+@pytest.mark.parametrize("key, value, raises", CVR_ID_NAMES_STRICT)
+def test_element_id_invalid_not_strict(key, value, raises, element_index):
+    expected = value
+    model = element_index.by_id(key)
+    actual = model.model__type if isinstance(model, NistModel) else model
+    assert actual == expected
+
+
+@pytest.mark.parametrize("key, value, raises", CVR_ID_NAMES_STRICT)
+def test_element_id_invalid_strict(key, value, raises, element_index):
+    expected = value
+    with raises:
+        model = element_index.by_id(key, strict = True)
+        actual = model.model__type if isinstance(model, NistModel) else model
+        assert actual == expected
+
+
 @pytest.mark.parametrize("id_types", CVR_ID_TYPES)
 def test_element_id_types(id_types, element_index):
     expected = id_types
@@ -174,6 +224,25 @@ def test_element_id_types(id_types, element_index):
         value = value.model__type[start:]
         actual[key] = value
     assert actual == expected
+
+
+@pytest.mark.parametrize("key, value, raises", CVR_TYPE_NAMES_STRICT)
+def test_element_type_invalid_not_strict(key, value, raises, element_index):
+    expected = value
+    models = list(element_index.by_type(key))
+    actual = models[0].model__type \
+        if models and isinstance(models[0], NistModel) else models
+    assert actual == expected
+
+
+@pytest.mark.parametrize("key, value, raises", CVR_TYPE_NAMES_STRICT)
+def test_element_type_invalid_strict(key, value, raises, element_index):
+    expected = value
+    with raises:
+        models = list(element_index.by_type(key, strict = True))
+        actual = models[0].model__type \
+            if models and isinstance(models[0], NistModel) else models
+        assert actual == expected
 
 
 @pytest.mark.parametrize("type_names", CVR_TYPE_NAMES)
@@ -203,6 +272,25 @@ def test_document_id_names(id_names, document_index):
     assert actual == expected
 
 
+@pytest.mark.parametrize("key, value, raises", CVR_ID_NAMES_STRICT)
+def test_document_id_invalid_not_strict(key, value, raises, document_index):
+    expected = value
+    model = document_index.by_id(key)
+    actual = model.value.model__type \
+        if model and isinstance(model.value, NistModel) else model
+    assert actual == expected
+
+
+@pytest.mark.parametrize("key, value, raises", CVR_ID_NAMES_STRICT)
+def test_document_id_invalid_strict(key, value, raises, document_index):
+    expected = value
+    with raises:
+        model = document_index.by_id(key, strict = True)
+        actual = model.value.model__type \
+            if model and isinstance(model.value, NistModel) else model
+        assert actual == expected
+
+
 @pytest.mark.parametrize("id_types", CVR_ID_TYPES)
 def test_document_id_types(id_types, document_index):
     expected = id_types
@@ -213,6 +301,25 @@ def test_document_id_types(id_types, document_index):
         value = value.model__type[start:]
         actual[key] = value
     assert actual == expected
+
+
+@pytest.mark.parametrize("key, value, raises", CVR_TYPE_NAMES_STRICT)
+def test_document_type_invalid_not_strict(key, value, raises, document_index):
+    expected = value
+    models = list(document_index.by_type(key))
+    actual = models[0].value.model__type \
+        if models and isinstance(models[0].value, NistModel) else models
+    assert actual == expected
+
+
+@pytest.mark.parametrize("key, value, raises", CVR_TYPE_NAMES_STRICT)
+def test_document_type_invalid_strict(key, value, raises, document_index):
+    expected = value
+    with raises:
+        models = list(document_index.by_type(key, strict = True))
+        actual = models[0].value.model__type \
+            if models and isinstance(models[0].value, NistModel) else models
+        assert actual == expected
 
 
 @pytest.mark.parametrize("type_names", CVR_TYPE_NAMES)
