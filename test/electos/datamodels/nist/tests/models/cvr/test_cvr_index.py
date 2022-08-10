@@ -96,34 +96,34 @@ CVR_ID_NAMES_STRICT = [
 
 CVR_ID_TYPES = [
     {
-        "ballot-marker-1": "ReportingDevice",
-        "bedrock-precinct": "GpUnit",
-        "candidate-cosmo-spacely": "Candidate",
-        "candidate-harlan-ellis": "Candidate",
-        "candidate-jane-jetson": "Candidate",
-        "candidate-rudi-indexer": "Candidate",
-        "candidate-spencer-cogswell": "Candidate",
-        "contest-ballot-measure-1--selection-no": "BallotMeasureSelection",
-        "contest-ballot-measure-1--selection-yes": "BallotMeasureSelection",
-        "contest-ballot-measure-gadget-county-1": "BallotMeasureContest",
-        "contest-control-board-spaceport": "CandidateContest",
-        "contest-control-board-spaceport--selection-harlan-ellis": "CandidateSelection",
-        "contest-control-board-spaceport--selection-jane-jetson": "CandidateSelection",
-        "contest-control-board-spaceport--selection-rudi-indexer": "CandidateSelection",
-        "contest-control-board-spaceport--selection-write-in-1": "CandidateSelection",
-        "contest-control-board-spaceport--selection-write-in-2": "CandidateSelection",
-        "contest-mayor--selection-cosmo-spacely": "CandidateSelection",
-        "contest-mayor--selection-spencer-cogswell": "CandidateSelection",
-        "contest-mayor--selection-write-in": "CandidateSelection",
-        "contest-mayor-orbit-city": "CandidateContest",
-        "downtown-precinct": "GpUnit",
-        "gadget-county": "GpUnit",
-        "gadget-county-2021-06": "Election",
-        "party-hadron": "Party",
-        "party-lepton": "Party",
-        "port-precinct": "GpUnit",
-        "snapshot-01": "CVRSnapshot",
-        "spacetown-precinct": "GpUnit",
+        "ballot-marker-1": "CVR.ReportingDevice",
+        "bedrock-precinct": "CVR.GpUnit",
+        "candidate-cosmo-spacely": "CVR.Candidate",
+        "candidate-harlan-ellis": "CVR.Candidate",
+        "candidate-jane-jetson": "CVR.Candidate",
+        "candidate-rudi-indexer": "CVR.Candidate",
+        "candidate-spencer-cogswell": "CVR.Candidate",
+        "contest-ballot-measure-1--selection-no": "CVR.BallotMeasureSelection",
+        "contest-ballot-measure-1--selection-yes": "CVR.BallotMeasureSelection",
+        "contest-ballot-measure-gadget-county-1": "CVR.BallotMeasureContest",
+        "contest-control-board-spaceport": "CVR.CandidateContest",
+        "contest-control-board-spaceport--selection-harlan-ellis": "CVR.CandidateSelection",
+        "contest-control-board-spaceport--selection-jane-jetson": "CVR.CandidateSelection",
+        "contest-control-board-spaceport--selection-rudi-indexer": "CVR.CandidateSelection",
+        "contest-control-board-spaceport--selection-write-in-1": "CVR.CandidateSelection",
+        "contest-control-board-spaceport--selection-write-in-2": "CVR.CandidateSelection",
+        "contest-mayor--selection-cosmo-spacely": "CVR.CandidateSelection",
+        "contest-mayor--selection-spencer-cogswell": "CVR.CandidateSelection",
+        "contest-mayor--selection-write-in": "CVR.CandidateSelection",
+        "contest-mayor-orbit-city": "CVR.CandidateContest",
+        "downtown-precinct": "CVR.GpUnit",
+        "gadget-county": "CVR.GpUnit",
+        "gadget-county-2021-06": "CVR.Election",
+        "party-hadron": "CVR.Party",
+        "party-lepton": "CVR.Party",
+        "port-precinct": "CVR.GpUnit",
+        "snapshot-01": "CVR.CVRSnapshot",
+        "spacetown-precinct": "CVR.GpUnit",
     },
 ]
 
@@ -218,11 +218,9 @@ def test_element_id_invalid_strict(key, value, raises, element_index):
 def test_element_id_types(id_types, element_index):
     expected = id_types
     actual = {}
-    start = len(CVR_NAMESPACE) + 1
     for key in sorted(element_index.ids()):
-        value = element_index.by_id(key)
-        value = value.model__type[start:]
-        actual[key] = value
+        model = element_index.by_id(key)
+        actual[key] = model.model__type
     assert actual == expected
 
 
@@ -258,8 +256,8 @@ def test_element_type_counts(type_counts, element_index):
     actual = {}
     for key in element_index.types():
         items = list(element_index.by_type(key))
-        value = len(items)
-        actual[key] = value
+        count = len(items)
+        actual[key] = count
     assert actual == expected
 
 
@@ -295,11 +293,9 @@ def test_document_id_invalid_strict(key, value, raises, document_index):
 def test_document_id_types(id_types, document_index):
     expected = id_types
     actual = {}
-    start = len(CVR_NAMESPACE) + 1
     for key in document_index.ids():
-        value = document_index.by_id(key).value
-        value = value.model__type[start:]
-        actual[key] = value
+        model = document_index.by_id(key).value
+        actual[key] = model.model__type
     assert actual == expected
 
 
@@ -335,6 +331,6 @@ def test_document_type_counts(type_counts, document_index):
     actual = {}
     for key in document_index.types():
         items = list(document_index.by_type(key))
-        value = len(items)
-        actual[key] = value
+        count = len(items)
+        actual[key] = count
     assert actual == expected
