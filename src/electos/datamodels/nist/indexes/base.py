@@ -52,20 +52,20 @@ class IndexBase(metaclass = ABCMeta):
 
     # --- Types
 
-    def types(self):
+    def types(self, with_namespace = True):
         """Access all element type names."""
         for name in self._by_type:
-            yield name
+            yield name if with_namespace else name[len(self._namespace) + 1:]
 
 
-    def by_type(self, type, strict = False, with_namespace = True):
+    def by_type(self, type, strict = False):
         """Access all elements whose '@type' is 'type'.
 
         Yields: Each element with the given type.
             The order of the elements in the model is preserved.
         """
         type_ = type
-        if with_namespace and "." not in type_:
+        if "." not in type_:
             type_ = f"{self._namespace}.{type_}"
         items = self._by_type.get(type_, [])
         if not items and strict:
