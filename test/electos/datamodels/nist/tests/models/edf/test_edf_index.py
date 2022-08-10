@@ -162,6 +162,30 @@ EDF_TYPE_NAMES = [
 ]
 
 
+EDF_TYPE_NAMES_WITHOUT_NAMESPACE = [
+    [
+        "BallotMeasureContest",
+        "BallotMeasureSelection",
+        "BallotStyle",
+        "Candidate",
+        "CandidateContest",
+        "CandidateSelection",
+        "DeviceClass",
+        "Election",
+        "ExternalIdentifier",
+        "Header",
+        "InternationalizedText",
+        "LanguageString",
+        "OrderedContest",
+        "OrderedHeader",
+        "Party",
+        "Person",
+        "ReportingDevice",
+        "ReportingUnit",
+    ],
+]
+
+
 EDF_TYPE_NAMES_STRICT = [
     # Exists
     (
@@ -198,6 +222,30 @@ EDF_TYPE_COUNTS = [
         "ElectionResults.Person": 3,
         "ElectionResults.ReportingDevice": 1,
         "ElectionResults.ReportingUnit": 5,
+    },
+]
+
+
+EDF_TYPE_COUNTS_WITHOUT_NAMESPACE = [
+    {
+        "BallotMeasureContest": 1,
+        "BallotMeasureSelection": 2,
+        "BallotStyle": 4,
+        "Candidate": 5,
+        "CandidateContest": 2,
+        "CandidateSelection": 8,
+        "DeviceClass": 1,
+        "Election": 1,
+        "ExternalIdentifier": 10,
+        "Header": 3,
+        "InternationalizedText": 24,
+        "LanguageString": 24,
+        "OrderedContest": 8,
+        "OrderedHeader": 8,
+        "Party": 2,
+        "Person": 3,
+        "ReportingDevice": 1,
+        "ReportingUnit": 5,
     },
 ]
 
@@ -266,11 +314,29 @@ def test_element_type_names(type_names, element_index):
     assert actual == expected
 
 
+@pytest.mark.parametrize("type_names", EDF_TYPE_NAMES_WITHOUT_NAMESPACE)
+def test_element_type_names_without_namespace(type_names, element_index):
+    expected = type_names
+    actual = sorted(element_index.types(with_namespace = False))
+    assert actual == expected
+
+
 @pytest.mark.parametrize("type_counts", EDF_TYPE_COUNTS)
 def test_element_type_counts(type_counts, element_index):
     expected = type_counts
     actual = {}
     for key in element_index.types():
+        items = list(element_index.by_type(key))
+        count = len(items)
+        actual[key] = count
+    assert actual == expected
+
+
+@pytest.mark.parametrize("type_counts", EDF_TYPE_COUNTS_WITHOUT_NAMESPACE)
+def test_element_type_counts_without_namespace(type_counts, element_index):
+    expected = type_counts
+    actual = {}
+    for key in element_index.types(with_namespace = False):
         items = list(element_index.by_type(key))
         count = len(items)
         actual[key] = count
@@ -341,11 +407,29 @@ def test_document_type_names(type_names, document_index):
     assert actual == expected
 
 
+@pytest.mark.parametrize("type_names", EDF_TYPE_NAMES_WITHOUT_NAMESPACE)
+def test_document_type_names_without_namespace(type_names, document_index):
+    expected = type_names
+    actual = sorted(document_index.types(with_namespace = False))
+    assert actual == expected
+
+
 @pytest.mark.parametrize("type_counts", EDF_TYPE_COUNTS)
 def test_document_type_counts(type_counts, document_index):
     expected = type_counts
     actual = {}
     for key in document_index.types():
+        items = list(document_index.by_type(key))
+        count = len(items)
+        actual[key] = count
+    assert actual == expected
+
+
+@pytest.mark.parametrize("type_counts", EDF_TYPE_COUNTS_WITHOUT_NAMESPACE)
+def test_document_type_counts_without_namespace(type_counts, document_index):
+    expected = type_counts
+    actual = {}
+    for key in document_index.types(with_namespace = False):
         items = list(document_index.by_type(key))
         count = len(items)
         actual[key] = count

@@ -149,6 +149,27 @@ CVR_TYPE_NAMES = [
 ]
 
 
+CVR_TYPE_NAMES_WITHOUT_NAMESPACE = [
+    [
+        "BallotMeasureContest",
+        "BallotMeasureSelection",
+        "CVR",
+        "CVRContest",
+        "CVRContestSelection",
+        "CVRSnapshot",
+        "CVRWriteIn",
+        "Candidate",
+        "CandidateContest",
+        "CandidateSelection",
+        "Election",
+        "GpUnit",
+        "Party",
+        "ReportingDevice",
+        "SelectionPosition",
+    ],
+]
+
+
 CVR_TYPE_NAMES_STRICT = [
     # Exists
     (
@@ -182,6 +203,27 @@ CVR_TYPE_COUNTS = [
         "CVR.Party": 2,
         "CVR.ReportingDevice": 1,
         "CVR.SelectionPosition": 10,
+    },
+]
+
+
+CVR_TYPE_COUNTS_WITHOUT_NAMESPACE = [
+    {
+        "BallotMeasureContest": 1,
+        "BallotMeasureSelection": 2,
+        "CVR": 4,
+        "CVRContest": 8,
+        "CVRContestSelection": 10,
+        "CVRSnapshot": 4,
+        "CVRWriteIn": 1,
+        "Candidate": 5,
+        "CandidateContest": 2,
+        "CandidateSelection": 8,
+        "Election": 1,
+        "GpUnit": 5,
+        "Party": 2,
+        "ReportingDevice": 1,
+        "SelectionPosition": 10,
     },
 ]
 
@@ -250,11 +292,29 @@ def test_element_type_names(type_names, element_index):
     assert actual == expected
 
 
+@pytest.mark.parametrize("type_names", CVR_TYPE_NAMES_WITHOUT_NAMESPACE)
+def test_element_type_names_without_namespace(type_names, element_index):
+    expected = type_names
+    actual = sorted(element_index.types(with_namespace = False))
+    assert actual == expected
+
+
 @pytest.mark.parametrize("type_counts", CVR_TYPE_COUNTS)
 def test_element_type_counts(type_counts, element_index):
     expected = type_counts
     actual = {}
     for key in element_index.types():
+        items = list(element_index.by_type(key))
+        count = len(items)
+        actual[key] = count
+    assert actual == expected
+
+
+@pytest.mark.parametrize("type_counts", CVR_TYPE_COUNTS_WITHOUT_NAMESPACE)
+def test_element_type_counts_without_namespace(type_counts, element_index):
+    expected = type_counts
+    actual = {}
+    for key in element_index.types(with_namespace = False):
         items = list(element_index.by_type(key))
         count = len(items)
         actual[key] = count
@@ -325,11 +385,29 @@ def test_document_type_names(type_names, document_index):
     assert actual == expected
 
 
+@pytest.mark.parametrize("type_names", CVR_TYPE_NAMES_WITHOUT_NAMESPACE)
+def test_document_type_names_without_namespace(type_names, document_index):
+    expected = type_names
+    actual = sorted(document_index.types(with_namespace = False))
+    assert actual == expected
+
+
 @pytest.mark.parametrize("type_counts", CVR_TYPE_COUNTS)
 def test_document_type_counts(type_counts, document_index):
     expected = type_counts
     actual = {}
     for key in document_index.types():
+        items = list(document_index.by_type(key))
+        count = len(items)
+        actual[key] = count
+    assert actual == expected
+
+
+@pytest.mark.parametrize("type_counts", CVR_TYPE_COUNTS_WITHOUT_NAMESPACE)
+def test_document_type_counts_without_namespace(type_counts, document_index):
+    expected = type_counts
+    actual = {}
+    for key in document_index.types(with_namespace = False):
         items = list(document_index.by_type(key))
         count = len(items)
         actual[key] = count
