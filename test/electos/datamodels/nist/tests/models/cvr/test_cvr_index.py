@@ -169,7 +169,7 @@ def test_element_id_types(id_types, element_index):
     expected = id_types
     actual = {}
     start = len(CVR_NAMESPACE) + 1
-    for key in id_types.keys():
+    for key in sorted(element_index.ids()):
         value = element_index.by_id(key)
         value = value.model__type[start:]
         actual[key] = value
@@ -187,7 +187,7 @@ def test_element_type_names(type_names, element_index):
 def test_element_type_counts(type_counts, element_index):
     expected = type_counts
     actual = {}
-    for key in type_counts.keys():
+    for key in element_index.types():
         items = list(element_index.by_type(key))
         value = len(items)
         actual[key] = value
@@ -208,7 +208,7 @@ def test_document_id_types(id_types, document_index):
     expected = id_types
     actual = {}
     start = len(CVR_NAMESPACE) + 1
-    for key in id_types.keys():
+    for key in document_index.ids():
         value = document_index.by_id(key).value
         value = value.model__type[start:]
         actual[key] = value
@@ -226,7 +226,7 @@ def test_document_type_names(type_names, document_index):
 def test_document_type_counts(type_counts, document_index):
     expected = type_counts
     actual = {}
-    for key in type_counts.keys():
+    for key in document_index.types():
         items = list(document_index.by_type(key))
         value = len(items)
         actual[key] = value
