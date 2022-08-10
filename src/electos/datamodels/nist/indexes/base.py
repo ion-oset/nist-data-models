@@ -18,6 +18,14 @@ class IndexBase(metaclass = ABCMeta):
     """
 
     def __init__(self, document, namespace):
+        """Create an index.
+
+        Parameters:
+            document: Nested tree of model elements.
+            namespace: The namespace prefix attached to element types, if any.
+                This parameter is deliberately not optional to avoid forgetting
+                to set it. If there is no namespace use "".
+        """
         # Document to index
         self._document = document
         # Namespace prefix
@@ -33,7 +41,14 @@ class IndexBase(metaclass = ABCMeta):
     # --- IDs
 
     def ids(self):
-        """Access all element type IDs."""
+        """Access all element type IDs.
+
+        The order is the same order they are encountered in the document.
+        Each ID must be unique.
+
+        Yields:
+            The id of each element in the document that has one.
+        """
         for name in self._by_id:
             yield name
 
@@ -41,7 +56,16 @@ class IndexBase(metaclass = ABCMeta):
     def by_id(self, id, strict = False):
         """Access element whose '@id' is 'id'.
 
-        Preserves declaration order of the elements in the model.
+        Parameters:
+            id: Model ID to look up.
+            strict: Force an exception if the model ID is not found.
+
+        Returns:
+            The element associated with the model ID.
+            None, if the ID is not found and 'strict' is false.
+
+        Raises:
+            KeyError if the ID is not found and 'strict' is true.
         """
         id_ = id
         item = self._by_id.get(id_, None)
@@ -53,7 +77,14 @@ class IndexBase(metaclass = ABCMeta):
     # --- Types
 
     def types(self, with_namespace = True):
-        """Access all element type names."""
+        """Access all element type names.
+
+        Each type name only appears once in the order they are first encountered
+        in the document.
+
+        Yields:
+            The type names of elements found in the document.
+        """
         for name in self._by_type:
             yield name if with_namespace else name[len(self._namespace) + 1:]
 
@@ -61,8 +92,17 @@ class IndexBase(metaclass = ABCMeta):
     def by_type(self, type, strict = False):
         """Access all elements whose '@type' is 'type'.
 
+        Parameters:
+            type: Model type to look up.
+            strict: Force an exception if the model type is not found.
+            with_namespace: True if the schema namespace prefix is required.
+                Otherwise prepend the namespace to all type names for lookup.
+
         Yields: Each element with the given type.
             The order of the elements in the model is preserved.
+
+        Raises:
+            KeyError if the ID is not found and 'strict' is true.
         """
         type_ = type
         if "." not in type_:
@@ -97,11 +137,8 @@ class IndexBase(metaclass = ABCMeta):
     def _walk_document(self, parent):
         """Walk all objects in a document, depth first.
 
-        Yields the objects and their parent objects, to allow basic mutations at
-        each step.
-        - Mappings yield key, value pairs.
-        - Sequences yield index, value pairs.
-        - Scalars yield themselves.
+        Yields the objects, their parents, and their keys, to allow basic
+        mutations of the document tree at each step.
 
         Parameters:
             parent: The object being walked.
