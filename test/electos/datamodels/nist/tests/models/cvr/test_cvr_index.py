@@ -1,7 +1,7 @@
 import pytest
 
 from electos.datamodels.nist.models.cvr import CastVoteRecordReport
-from electos.datamodels.nist.indexes import ElementIndex
+from electos.datamodels.nist.indexes import DocumentIndex, ElementIndex
 
 from tests.utility import load_test_json, raises, raises_none
 
@@ -189,6 +189,45 @@ def test_element_type_counts(type_counts, element_index):
     actual = {}
     for key in type_counts.keys():
         items = list(element_index.by_type(key))
+        value = len(items)
+        actual[key] = value
+    assert actual == expected
+
+
+# Document Index
+
+@pytest.mark.parametrize("id_names", CVR_ID_NAMES)
+def test_document_id_names(id_names, document_index):
+    expected = id_names
+    actual = sorted(document_index.ids())
+    assert actual == expected
+
+
+@pytest.mark.parametrize("id_types", CVR_ID_TYPES)
+def test_document_id_types(id_types, document_index):
+    expected = id_types
+    actual = {}
+    start = len(CVR_NAMESPACE) + 1
+    for key in id_types.keys():
+        value = document_index.by_id(key).value
+        value = value.model__type[start:]
+        actual[key] = value
+    assert actual == expected
+
+
+@pytest.mark.parametrize("type_names", CVR_TYPE_NAMES)
+def test_document_type_names(type_names, document_index):
+    expected = type_names
+    actual = sorted(document_index.types())
+    assert actual == expected
+
+
+@pytest.mark.parametrize("type_counts", CVR_TYPE_COUNTS)
+def test_document_type_counts(type_counts, document_index):
+    expected = type_counts
+    actual = {}
+    for key in type_counts.keys():
+        items = list(document_index.by_type(key))
         value = len(items)
         actual[key] = value
     assert actual == expected
